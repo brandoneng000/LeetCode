@@ -11,6 +11,7 @@ class Solution:
 
         num_set.remove(max(num_set))
         num_set.remove(max(num_set))
+        
         return max(num_set)
 
 def main():
