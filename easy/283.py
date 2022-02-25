@@ -17,8 +17,6 @@ class Solution(object):
             else:
                 index += 1
 
-        return nums
-        
 def main():
     sol = Solution()
     print(sol.moveZeroes([0,1,0,3,12]))
