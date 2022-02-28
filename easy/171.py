@@ -12,8 +12,6 @@ class Solution:
             column = (ord(letter) - ord("A") + 1) * (26 ** number_of_columns)
             column_number += column
 
-            
-
         column_number += ord(columnTitle[-1]) - ord("A") + 1
 
         return column_number
