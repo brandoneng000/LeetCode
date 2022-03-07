@@ -17,7 +17,8 @@ class Solution:
                 + first_late_not_absent, not_absent, not_late_or_absent
             not_late, first_late = add_absent + add_present, not_late
 
-        # return all_valid  % mod_val
+        return all_valid  % mod_val
+        
         # def record(attendence: str, total: int):
         #     if (attendence.count('A') >= 2 or "LLL" in attendence):
         #         return 0
