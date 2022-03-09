@@ -5,8 +5,6 @@ class Solution:
         count = 0
 
         for index in range(1, len(s)):
-            test1 = s[index-1]
-            test2 = s[index]
             if s[index-1] != s[index]:
                 count += min(prev, cur)
                 prev, cur = cur, 1
