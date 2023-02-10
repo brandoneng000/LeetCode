@@ -2,6 +2,7 @@ from typing import List
 
 class Solution:
     def findTheDistanceValue(self, arr1: List[int], arr2: List[int], d: int) -> int:
+        # Return the number of values in arr1 that fulfill |arr1[i]-arr2[j]| <= d where j is all arr2[j] is all vals in arr2
         result = 0
 
         for num in arr1:
