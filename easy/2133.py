@@ -10,15 +10,14 @@ class Solution:
         for r in range(len(matrix)):
             for c in range(len(matrix[0])):
                 nums.add(matrix[r][c])
-                # rows[r] += matrix[r][c]
-                # cols[c] += matrix[r][c]
+                rows[r] += matrix[r][c]
+                cols[c] += matrix[r][c]
             
             if len(nums) != len(matrix):
                 return False
             nums.clear()
         
-        # return all(total == row for row in rows) and all(total == col for col in cols)
-        return True
+        return all(total == row for row in rows) and all(total == col for col in cols)
 
 def main():
     sol = Solution()
