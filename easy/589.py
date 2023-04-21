@@ -8,14 +8,26 @@ class Node:
 
 class Solution:
     def preorder(self, root: 'Node') -> List[int]:
-        self.in_order = []
-        def dfs(root: 'Node'):
-            if not root:
-                return
+        # self.pre_order = []
+        # def dfs(root: 'Node'):
+        #     if not root:
+        #         return
             
-            self.in_order.append(root.val)
-            for child in root.children:
-                dfs(child)
+        #     self.pre_order.append(root.val)
+        #     for child in root.children:
+        #         dfs(child)
         
-        dfs(root)
-        return self.in_order
+        # dfs(root)
+        # return self.pre_order
+        if not root:
+            return []
+        pre_order = []
+        stack = [root]
+
+        while stack:
+            node = stack.pop()
+            pre_order.append(node.val)
+            if node.children:
+                stack.extend(node.children[::-1])
+        
+        return pre_order
