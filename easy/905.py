@@ -1,37 +1,32 @@
 from typing import List
+import collections
 
 class Solution:
     def sortArrayByParity(self, nums: List[int]) -> List[int]:
-        # left = 0
-        # right = len(nums) - 1
+        res = collections.deque()
 
-        # while left < right:
-        #     while left < len(nums) and nums[left] % 2 == 0:
-        #         left += 1
-        #     while right > -1 and nums[right] % 2 == 1:
-        #         right -= 1
-
-        #     if left == len(nums) or right == 0 or left > right:
-        #         break
-
-        #     nums[left], nums[right] = nums[right], nums[left]
-        #     left += 1
-        #     right -= 1
-
-        # return nums
-        left = 0
-        right = len(nums) - 1
-
-        while left < right:
-            if nums[left] % 2 > nums[right] % 2:
-                nums[left], nums[right] = nums[right], nums[left]
-            
-            if nums[left] % 2 == 0:
-                left += 1
-            if nums[right] % 2 == 1:
-                right -= 1
+        for n in nums:
+            if n & 1:
+                res.append(n)
+            else:
+                res.appendleft(n)
         
-        return nums
+        return res
+
+    # def sortArrayByParity(self, nums: List[int]) -> List[int]:
+    #     left = 0
+    #     right = len(nums) - 1
+
+    #     while left < right:
+    #         if nums[left] % 2 > nums[right] % 2:
+    #             nums[left], nums[right] = nums[right], nums[left]
+            
+    #         if nums[left] % 2 == 0:
+    #             left += 1
+    #         if nums[right] % 2 == 1:
+    #             right -= 1
+        
+    #     return nums
 
 def main():
     sol = Solution()
