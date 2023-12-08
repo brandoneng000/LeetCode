@@ -10,19 +10,35 @@ class Solution:
     def tree2str(self, root: Optional[TreeNode]) -> str:
         if not root:
             return ""
+
+        res = str(root.val)
+
+        if root.left:
+            res += f"({self.tree2str(root.left)})"
+        elif root.right:
+            res += "()"
         
-        def dfs(root: TreeNode):
-            if not root.left and not root.right:
-                return str(root.val)
+        if root.right:
+            res += f"({self.tree2str(root.right)})"
 
-            res = f"{root.val}"
-            if root.left:
-                res += f"({dfs(root.left)})"
-            else:
-                res += "()"
-            if root.right:
-                res += f"({dfs(root.right)})"
+        return res
 
-            return res
+    # def tree2str(self, root: Optional[TreeNode]) -> str:
+    #     if not root:
+    #         return ""
+        
+    #     def dfs(root: TreeNode):
+    #         if not root.left and not root.right:
+    #             return str(root.val)
+
+    #         res = f"{root.val}"
+    #         if root.left:
+    #             res += f"({dfs(root.left)})"
+    #         else:
+    #             res += "()"
+    #         if root.right:
+    #             res += f"({dfs(root.right)})"
+
+    #         return res
             
-        return dfs(root)
+    #     return dfs(root)
