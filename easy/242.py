@@ -1,9 +1,14 @@
+from collections import Counter
+
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        if len(s) != len(t):
-            return False
+        return Counter(s) == Counter(t)
+    
+    # def isAnagram(self, s: str, t: str) -> bool:
+    #     if len(s) != len(t):
+    #         return False
             
-        return "".join(sorted(s)) == "".join(sorted(t))
+    #     return "".join(sorted(s)) == "".join(sorted(t))
         
 def main():
     sol = Solution()
