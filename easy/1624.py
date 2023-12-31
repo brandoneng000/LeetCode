@@ -1,19 +1,35 @@
+from collections import defaultdict
+
 class Solution:
     def maxLengthBetweenEqualCharacters(self, s: str) -> int:
-        if len(s) == 1:
-            return -1
+        res = -1
+
+        indexes = defaultdict(list)
+
+        for i, c in enumerate(s):
+            indexes[c].append(i)
         
-        s_dict = {}
-        longest = -1
+        for c in indexes:
+            if len(indexes[c]) > 1:
+                res = max(res, indexes[c][-1] - (indexes[c][0] + 1))
+        
+        return res
 
-        for index, letter in enumerate(s):
-            s_dict[letter] = s_dict.get(letter, []) + [index]
+    # def maxLengthBetweenEqualCharacters(self, s: str) -> int:
+    #     if len(s) == 1:
+    #         return -1
+        
+    #     s_dict = {}
+    #     longest = -1
 
-        for key in s_dict:
-            if len(s_dict[key]) >= 2:
-                longest = max(longest, s_dict[key][-1] - (s_dict[key][0] + 1))
+    #     for index, letter in enumerate(s):
+    #         s_dict[letter] = s_dict.get(letter, []) + [index]
 
-        return longest
+    #     for key in s_dict:
+    #         if len(s_dict[key]) >= 2:
+    #             longest = max(longest, s_dict[key][-1] - (s_dict[key][0] + 1))
+
+    #     return longest
 
 def main():
     sol = Solution()
