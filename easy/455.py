@@ -2,21 +2,33 @@ from typing import List
 
 class Solution:
     def findContentChildren(self, g: List[int], s: List[int]) -> int:
-        if s:
-            s.sort()
-        else:
-            return 0
+        cookies = sorted(s)
+        greed = sorted(g)
+        c = k = 0
 
-        g.sort()
-        content = 0
-
-        for cookie in s:
-            if g[content] <= cookie:
-                content += 1
-                if content == len(g):
-                    break
+        while c < len(cookies) and k < len(greed):
+            if cookies[c] >= greed[k]:
+                k += 1
+            c += 1
         
-        return content
+        return k
+
+    # def findContentChildren(self, g: List[int], s: List[int]) -> int:
+    #     if s:
+    #         s.sort()
+    #     else:
+    #         return 0
+
+    #     g.sort()
+    #     content = 0
+
+    #     for cookie in s:
+    #         if g[content] <= cookie:
+    #             content += 1
+    #             if content == len(g):
+    #                 break
+        
+    #     return content
         
         # content = 0
 
