@@ -8,16 +8,27 @@ class TreeNode:
         self.right = right
 class Solution:
     def leafSimilar(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
-        def get_leaves(root: TreeNode, leaves: List[int]):
+        def get_leaves(root: TreeNode):
+            if not root:
+                return []
             if not root.left and not root.right:
-                leaves.append(root.val)
-                return leaves
+                return [root.val]
             
-            if root.left:
-                get_leaves(root.left, leaves)
-            if root.right:
-                get_leaves(root.right, leaves)
+            return get_leaves(root.left) + get_leaves(root.right)
 
-            return leaves
+        return get_leaves(root1) == get_leaves(root2)
+
+    # def leafSimilar(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
+    #     def get_leaves(root: TreeNode, leaves: List[int]):
+    #         if not root.left and not root.right:
+    #             leaves.append(root.val)
+    #             return leaves
             
-        return get_leaves(root1, []) == get_leaves(root2, [])
+    #         if root.left:
+    #             get_leaves(root.left, leaves)
+    #         if root.right:
+    #             get_leaves(root.right, leaves)
+
+    #         return leaves
+            
+    #     return get_leaves(root1, []) == get_leaves(root2, [])
