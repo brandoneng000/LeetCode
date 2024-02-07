@@ -1,19 +1,23 @@
-import collections
+from collections import Counter
 
 class Solution:
     def frequencySort(self, s: str) -> str:
-        s_count = collections.Counter(s)
-        sorted_s = sorted(set(s), key=lambda x: s_count[x], reverse=True)
-        res = []
-        for s in sorted_s:
-            res.extend([s] * s_count[s])
+        return ''.join([letter * count for letter, count in Counter(s).most_common()])
 
-        return "".join(res)
+    # def frequencySort(self, s: str) -> str:
+    #     s_count = collections.Counter(s)
+    #     sorted_s = sorted(set(s), key=lambda x: s_count[x], reverse=True)
+    #     res = []
+    #     for s in sorted_s:
+    #         res.extend([s] * s_count[s])
 
-        # s_count = collections.Counter(s)
-        # sorted_s = sorted(s, key=lambda x: (s_count[x], x), reverse=True)
+    #     return "".join(res)
+
+    # def frequencySort(self, s: str) -> str:
+    #     s_count = collections.Counter(s)
+    #     sorted_s = sorted(s, key=lambda x: (s_count[x], x), reverse=True)
         
-        # return "".join(sorted_s)
+    #     return "".join(sorted_s)
 
 def main():
     sol = Solution()
