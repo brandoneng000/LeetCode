@@ -8,16 +8,33 @@ class TreeNode:
         self.right = right
 class Solution:
     def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
-        q = collections.deque([root])
+        def dfs(root: TreeNode, level: int):
+            if not root:
+                return
+            if level > self.level:
+                self.level = level
+                self.res = root.val
+            
+            dfs(root.left, level + 1)
+            dfs(root.right, level + 1)
+        
+        self.level = -1
+        self.res = root.val
+        dfs(root, 0)
+        return self.res
 
-        while q:
-            node = q.popleft()
-            if node.right:
-                q.append(node.right)
-            if node.left:
-                q.append(node.left)
+
+    # def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
+    #     q = collections.deque([root])
+
+    #     while q:
+    #         node = q.popleft()
+    #         if node.right:
+    #             q.append(node.right)
+    #         if node.left:
+    #             q.append(node.left)
                 
-        return node.val
+    #     return node.val
 
         
         # q = collections.deque([root])
