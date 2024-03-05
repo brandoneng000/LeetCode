@@ -2,10 +2,26 @@ from collections import deque
 
 class Solution:
     def minimumLength(self, s: str) -> int:
-        while len(s) > 1 and s[0] == s[-1]:
-            s = s.strip(s[0])
+        left = 0
+        right = len(s) - 1
+
+        while left < right and s[left] == s[right]:
+            letter = s[left]
+
+            while left <= right and s[left] == letter:
+                left += 1
+            
+            while left < right and s[right] == letter:
+                right -= 1
         
-        return len(s)
+        return right - left + 1
+
+        
+    # def minimumLength(self, s: str) -> int:
+    #     while len(s) > 1 and s[0] == s[-1]:
+    #         s = s.strip(s[0])
+        
+    #     return len(s)
     
     # def minimumLength(self, s: str) -> int:
     #     string_chars = deque()
