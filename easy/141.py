@@ -9,17 +9,30 @@ class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         if not head or not head.next:
             return False
-        else:
-            slow = head
-            fast = head.next
 
-        while slow is not fast:
+        slow = head
+        fast = head.next
+
+        while slow and fast and fast.next and slow != fast:
             slow = slow.next
-            fast = fast.next
-            if not slow or not fast:
-                return False
-            fast = fast.next
-            if not fast:
-                return False
+            fast = fast.next.next
+
+        return slow == fast
+
+    # def hasCycle(self, head: Optional[ListNode]) -> bool:
+    #     if not head or not head.next:
+    #         return False
+    #     else:
+    #         slow = head
+    #         fast = head.next
+
+    #     while slow is not fast:
+    #         slow = slow.next
+    #         fast = fast.next
+    #         if not slow or not fast:
+    #             return False
+    #         fast = fast.next
+    #         if not fast:
+    #             return False
         
-        return True
+    #     return True
