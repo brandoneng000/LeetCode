@@ -2,19 +2,22 @@ from typing import List
 
 class Solution:
     def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        res = []
-        num_set = set()
-        short = nums1 if len(nums1) <= len(nums2) else nums2
-        long = nums1 if len(nums1) > len(nums2) else nums2
+        return list(set(nums1) & set(nums2))
 
-        for num in short:
-            num_set.add(num)
+    # def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+    #     res = []
+    #     num_set = set()
+    #     short = nums1 if len(nums1) <= len(nums2) else nums2
+    #     long = nums1 if len(nums1) > len(nums2) else nums2
 
-        for num in num_set:
-            if num in long:
-                res.append(num)
+    #     for num in short:
+    #         num_set.add(num)
+
+    #     for num in num_set:
+    #         if num in long:
+    #             res.append(num)
         
-        return res
+    #     return res
 
         
 def main():
