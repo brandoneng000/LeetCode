@@ -1,16 +1,29 @@
 class Solution:
     def maxDepth(self, s: str) -> int:
-        result = 0
+        res = 0
         count = 0
 
         for c in s:
             if c == '(':
                 count += 1
+                res = max(res, count)
             elif c == ')':
                 count -= 1
-            result = max(result, count)
         
-        return result
+        return res
+    
+    # def maxDepth(self, s: str) -> int:
+    #     result = 0
+    #     count = 0
+
+    #     for c in s:
+    #         if c == '(':
+    #             count += 1
+    #         elif c == ')':
+    #             count -= 1
+    #         result = max(result, count)
+        
+    #     return result
         
 def main():
     sol = Solution()
