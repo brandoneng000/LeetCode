@@ -1,18 +1,28 @@
 from typing import List
-import collections
+from collections import deque
 
 class Solution:
     def deckRevealedIncreasing(self, deck: List[int]) -> List[int]:
-        deck.sort()
-        index = collections.deque(range(len(deck)))
-        res = [None] * len(deck)
+        d = deque()
 
-        for card in deck:
-            res[index.popleft()] = card
-            if index:
-                index.append(index.popleft())
+        for card in sorted(deck)[::-1]:
+            d.rotate()
+            d.appendleft(card)
+        
+        return d
 
-        return res
+    # def deckRevealedIncreasing(self, deck: List[int]) -> List[int]:
+    #     deck.sort()
+    #     n = len(deck)
+    #     index = deque(range(n))
+    #     res = [-1] * n
+
+    #     for card in deck:
+    #         res[index.popleft()] = card
+    #         if index:
+    #             index.append(index.popleft())
+
+    #     return res
     
 def main():
     sol = Solution()
