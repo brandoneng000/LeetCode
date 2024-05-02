@@ -2,14 +2,24 @@ from typing import List
 
 class Solution:
     def findMaxK(self, nums: List[int]) -> int:
-        found = set()
-        matching = set()
+        nums_set = set(nums)
+        res = -1
+
         for num in nums:
-            if num in found:
-                matching.add(abs(num))
-            found.add(-num)
+            if -num in nums_set:
+                res = max(res, num)
         
-        return max(matching) if matching else -1
+        return res
+
+    # def findMaxK(self, nums: List[int]) -> int:
+    #     found = set()
+    #     matching = set()
+    #     for num in nums:
+    #         if num in found:
+    #             matching.add(abs(num))
+    #         found.add(-num)
+        
+    #     return max(matching) if matching else -1
 
 def main():
     sol = Solution()
