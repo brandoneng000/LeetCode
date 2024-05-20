@@ -2,51 +2,61 @@ from typing import List
 
 class Solution:
     def subsetXORSum(self, nums: List[int]) -> int:
-        # memory = {}
-        # combination = []
-        # result = 0
+        n = len(nums)
+        bits = 0
+
+        for num in nums:
+            bits |= num
         
-        # def recursive(index: int, stack: List[int], size: int):
-        #     if len(stack) == size:
-        #         combination.append(stack.copy())
-            
-        #     for i in range(index, len(nums)):
-        #         stack.append(nums[i])
-        #         recursive(i + 1, stack, size)
-        #         stack.pop()
+        return bits * int(2 ** (n - 1))
 
-        # for s in range(1, len(nums) + 1):
-        #     recursive(0, [], s)
-
-        # for combo in combination:
-        #     temp = tuple(combo)
-        #     memory[temp] = memory.get(tuple(combo[:-1]), 0) ^ combo[-1]
-        #     result += memory[temp]
-
-        # return result
-
-        memory = {}
-        result = 0
+    # def subsetXORSum(self, nums: List[int]) -> int:
+    #     memory = {}
+    #     combination = []
+    #     result = 0
         
-        def recursive(index: int, stack: List[int], size: int) -> int:
-            total = 0
-
-            if len(stack) == size:
-                temp = tuple(stack)
-                memory[temp] = memory.get(tuple(stack[:-1]), 0) ^ stack[-1]
-                return memory[temp]
+    #     def recursive(index: int, stack: List[int], size: int):
+    #         if len(stack) == size:
+    #             combination.append(stack.copy())
             
-            for i in range(index, len(nums)):
-                stack.append(nums[i])
-                total += recursive(i + 1, stack, size)
-                stack.pop()
+    #         for i in range(index, len(nums)):
+    #             stack.append(nums[i])
+    #             recursive(i + 1, stack, size)
+    #             stack.pop()
+
+    #     for s in range(1, len(nums) + 1):
+    #         recursive(0, [], s)
+
+    #     for combo in combination:
+    #         temp = tuple(combo)
+    #         memory[temp] = memory.get(tuple(combo[:-1]), 0) ^ combo[-1]
+    #         result += memory[temp]
+
+    #     return result
+
+    # def subsetXORSum(self, nums: List[int]) -> int:
+    #     memory = {}
+    #     result = 0
+        
+    #     def recursive(index: int, stack: List[int], size: int) -> int:
+    #         total = 0
+
+    #         if len(stack) == size:
+    #             temp = tuple(stack)
+    #             memory[temp] = memory.get(tuple(stack[:-1]), 0) ^ stack[-1]
+    #             return memory[temp]
             
-            return total
+    #         for i in range(index, len(nums)):
+    #             stack.append(nums[i])
+    #             total += recursive(i + 1, stack, size)
+    #             stack.pop()
+            
+    #         return total
 
-        for s in range(1, len(nums) + 1):
-            result += recursive(0, [], s)
+    #     for s in range(1, len(nums) + 1):
+    #         result += recursive(0, [], s)
 
-        return result
+    #     return result
     
 def main():
     sol = Solution()
