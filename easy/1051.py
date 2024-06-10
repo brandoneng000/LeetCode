@@ -1,20 +1,24 @@
 from typing import List
+
 class Solution:
     def heightChecker(self, heights: List[int]) -> int:
-        from collections import Counter
-        heights_count = Counter(heights)
-        height_key = sorted(heights_count.keys())
-        results = 0
-        index = 0
+        return sum(a != b for a, b in zip(heights, sorted(heights)))
 
-        for height in height_key:
-            while heights_count[height] > 0:
-                heights_count[height] -= 1
-                if heights[index] != height:
-                    results += 1
-                index += 1
+    # def heightChecker(self, heights: List[int]) -> int:
+    #     from collections import Counter
+    #     heights_count = Counter(heights)
+    #     height_key = sorted(heights_count.keys())
+    #     results = 0
+    #     index = 0
+
+    #     for height in height_key:
+    #         while heights_count[height] > 0:
+    #             heights_count[height] -= 1
+    #             if heights[index] != height:
+    #                 results += 1
+    #             index += 1
         
-        return results
+    #     return results
 
 
 def main():
