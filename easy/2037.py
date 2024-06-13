@@ -2,14 +2,17 @@ from typing import List
 
 class Solution:
     def minMovesToSeat(self, seats: List[int], students: List[int]) -> int:
-        seats.sort()
-        students.sort()
-        result = 0
+        return sum(abs(seat - student) for seat, student in zip(sorted(seats), sorted(students)))
 
-        for index in range(len(seats)):
-            result += abs(seats[index] - students[index])
+    # def minMovesToSeat(self, seats: List[int], students: List[int]) -> int:
+    #     seats.sort()
+    #     students.sort()
+    #     result = 0
 
-        return result
+    #     for index in range(len(seats)):
+    #         result += abs(seats[index] - students[index])
+
+    #     return result
             
 
 def main():
