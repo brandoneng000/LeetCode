@@ -2,9 +2,12 @@ from typing import List
 
 class Solution:
     def sortPeople(self, names: List[str], heights: List[int]) -> List[str]:
-        res = [(height, name) for name, height in zip(names, heights)]
-        res.sort(reverse=True)
-        return [name for height, name in res]
+        return [name for height, name in sorted(zip(heights, names), reverse=True)]
+        
+    # def sortPeople(self, names: List[str], heights: List[int]) -> List[str]:
+    #     res = [(height, name) for name, height in zip(names, heights)]
+    #     res.sort(reverse=True)
+    #     return [name for height, name in res]
 
 def main():
     sol = Solution()
