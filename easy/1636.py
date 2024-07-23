@@ -1,24 +1,27 @@
 from typing import List
-import collections
-
+from collections import Counter
 
 class Solution:
     def frequencySort(self, nums: List[int]) -> List[int]:
-        nums_count = collections.Counter(nums)
-        occurences = collections.defaultdict(list)
-        result = []
+        count = Counter(nums)
 
-        for num in nums_count:
-            occurences[nums_count[num]].append(num)
+        return sorted(nums, key=lambda x: (count[x], -x))
+
+
+    # def frequencySort(self, nums: List[int]) -> List[int]:
+    #     nums_count = collections.Counter(nums)
+    #     occurences = collections.defaultdict(list)
+    #     result = []
+
+    #     for num in nums_count:
+    #         occurences[nums_count[num]].append(num)
         
-        for occ in sorted(occurences):
-            occurences[occ].sort(reverse=True)
-            for num in occurences[occ]:
-                result += [num] * occ
+    #     for occ in sorted(occurences):
+    #         occurences[occ].sort(reverse=True)
+    #         for num in occurences[occ]:
+    #             result += [num] * occ
         
-        return result
-
-
+    #     return result
         
 
 def main():
