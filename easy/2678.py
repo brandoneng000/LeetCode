@@ -2,12 +2,15 @@ from typing import List
 
 class Solution:
     def countSeniors(self, details: List[str]) -> int:
-        res = 0
+        return sum(int(detail[11: 13]) > 60 for detail in details)
 
-        for detail in details:
-            res += int(detail[11: 13]) > 60
+    # def countSeniors(self, details: List[str]) -> int:
+    #     res = 0
 
-        return res
+    #     for detail in details:
+    #         res += int(detail[11: 13]) > 60
+
+    #     return res
         
 def main():
     sol = Solution()
