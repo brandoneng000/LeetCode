@@ -1,17 +1,24 @@
 from typing import List
-import collections
+# import collections
+from collections import Counter
 
 class Solution:
     def kthDistinct(self, arr: List[str], k: int) -> str:
-        arr_count = collections.Counter(arr)
+        count = Counter(arr)
+        res = [num for num in arr if count[num] == 1]
+
+        return res[k - 1] if k - 1 < len(res) else ""
+
+    # def kthDistinct(self, arr: List[str], k: int) -> str:
+    #     arr_count = collections.Counter(arr)
         
-        for word in arr:
-            if arr_count[word] == 1:
-                k -= 1
-                if k == 0:
-                    return word
+    #     for word in arr:
+    #         if arr_count[word] == 1:
+    #             k -= 1
+    #             if k == 0:
+    #                 return word
         
-        return ""
+    #     return ""
 
 
 def main():
