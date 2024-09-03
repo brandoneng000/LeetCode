@@ -1,18 +1,35 @@
 class Solution:
     def getLucky(self, s: str, k: int) -> int:
-        s = list(s)
+        def helper(num: int, k: int):
+            if k == 0:
+                return num
+            
+            cur = 0
 
-        for index in range(len(s)):
-            s[index] = str(ord(s[index]) - ord('a') + 1)
+            while num:
+                cur += num % 10
+                num //= 10
+            
+            return helper(cur, k - 1)
+
+        num = int(''.join(str(ord(letter) - ord('a') + 1) for letter in s))
+        return helper(num, k)
+
         
-        s = list(''.join(s))
+    # def getLucky(self, s: str, k: int) -> int:
+    #     s = list(s)
+
+    #     for index in range(len(s)):
+    #         s[index] = str(ord(s[index]) - ord('a') + 1)
         
-        for _ in range(k):
-            s = [int(digit) for digit in s]
-            convert = sum(s)
-            s = list(str(convert))
+    #     s = list(''.join(s))
         
-        return convert
+    #     for _ in range(k):
+    #         s = [int(digit) for digit in s]
+    #         convert = sum(s)
+    #         s = list(str(convert))
+        
+    #     return convert
 
     
 def main():
