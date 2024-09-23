@@ -3,13 +3,12 @@ from functools import cache
 
 class Solution:
     def minExtraChar(self, s: str, dictionary: List[str]) -> int:
-        n = len(s)
-        dict_set = set(dictionary)
-
-        @cache
         def dp(start):
             if start == n:
                 return 0
+            
+            if start in cache:
+                return cache[start]
             
             res = dp(start + 1) + 1
 
@@ -18,9 +17,34 @@ class Solution:
                 if curr in dict_set:
                     res = min(res, dp(end + 1))
             
+            cache[start] = res
             return res
         
+        n = len(s)
+        dict_set = set(dictionary)
+        cache = {}
+        
         return dp(0)
+    
+    # def minExtraChar(self, s: str, dictionary: List[str]) -> int:
+    #     n = len(s)
+    #     dict_set = set(dictionary)
+
+    #     @cache
+    #     def dp(start):
+    #         if start == n:
+    #             return 0
+            
+    #         res = dp(start + 1) + 1
+
+    #         for end in range(start, n):
+    #             curr = s[start: end + 1]
+    #             if curr in dict_set:
+    #                 res = min(res, dp(end + 1))
+            
+    #         return res
+        
+    #     return dp(0)
 
         
 def main():
