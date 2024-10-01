@@ -3,7 +3,7 @@ import collections
 
 class Solution:
     def canArrange(self, arr: List[int], k: int) -> bool:
-        remainder_count = collections.Counter()
+        remainder_count = [0] * k
 
         for n in arr:
             remainder_count[n % k] += 1
@@ -14,8 +14,23 @@ class Solution:
         for i in range(1, k // 2 + 1):
             if remainder_count[i] != remainder_count[k - i]:
                 return False
-        
+
         return True
+    
+    # def canArrange(self, arr: List[int], k: int) -> bool:
+    #     remainder_count = collections.Counter()
+
+    #     for n in arr:
+    #         remainder_count[n % k] += 1
+        
+    #     if remainder_count[0] % 2:
+    #         return False
+        
+    #     for i in range(1, k // 2 + 1):
+    #         if remainder_count[i] != remainder_count[k - i]:
+    #             return False
+        
+    #     return True
         
 def main():
     sol = Solution()
