@@ -2,16 +2,21 @@ from typing import List
 
 class Solution:
     def arrayRankTransform(self, arr: List[int]) -> List[int]:
-        arr_ordered = sorted(list(set(arr)))
-        arr_dict = {}
+        index_dict = { num: i for i, num in enumerate(sorted(set(arr)), 1) }
 
-        for index, val in enumerate(arr_ordered, 1):
-            arr_dict[val] = index
+        return [index_dict[num] for num in arr]
+
+    # def arrayRankTransform(self, arr: List[int]) -> List[int]:
+    #     arr_ordered = sorted(list(set(arr)))
+    #     arr_dict = {}
+
+    #     for index, val in enumerate(arr_ordered, 1):
+    #         arr_dict[val] = index
         
-        for index, val in enumerate(arr):
-            arr[index] = arr_dict[val]
+    #     for index, val in enumerate(arr):
+    #         arr[index] = arr_dict[val]
         
-        return arr
+    #     return arr
 
 def main():
     sol = Solution()
