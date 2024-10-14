@@ -1,5 +1,5 @@
 from typing import List
-from heapq import heappop,heappush, heapify
+from heapq import heappop, heappush, heapify, heapreplace
 
 class Solution:
     def maxKelements(self, nums: List[int], k: int) -> int:
@@ -8,11 +8,22 @@ class Solution:
         res = 0
 
         for _ in range(k):
-            val = -heappop(heap)
-            res += val
-            heappush(heap, -((val + 2) // 3))
+            res += -heap[0]
+            heapreplace(heap, -((-heap[0] + 2) // 3))
     
         return res
+    
+    # def maxKelements(self, nums: List[int], k: int) -> int:
+    #     heap = [-num for num in nums]
+    #     heapify(heap)
+    #     res = 0
+
+    #     for _ in range(k):
+    #         val = -heappop(heap)
+    #         res += val
+    #         heappush(heap, -((val + 2) // 3))
+    
+    #     return res
         
 def main():
     sol = Solution()
