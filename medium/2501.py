@@ -5,29 +5,57 @@ class Solution:
     def longestSquareStreak(self, nums: List[int]) -> int:
         nums_set = set(nums)
         visited = set()
+        cache = {}
         res = -1
 
-        for num in nums_set:
+        for num in nums:
             if num in visited:
                 continue
-            cur = 1
 
-            temp = num
-            while sqrt(temp) in nums_set:
-                temp = sqrt(temp)
-                visited.add(temp)
-                cur += 1
-            
+            cur = 1
             temp = num
             while temp * temp in nums_set:
                 temp *= temp
                 visited.add(temp)
+
+                if temp in cache:
+                    cur += cache[temp]
+                    break
+                
                 cur += 1
             
             if cur > 1:
                 res = max(res, cur)
-        
+
         return res
+
+
+    # def longestSquareStreak(self, nums: List[int]) -> int:
+    #     nums_set = set(nums)
+    #     visited = set()
+    #     res = -1
+
+    #     for num in nums_set:
+    #         if num in visited:
+    #             continue
+    #         cur = 1
+
+    #         temp = num
+    #         while sqrt(temp) in nums_set:
+    #             temp = sqrt(temp)
+    #             visited.add(temp)
+    #             cur += 1
+            
+    #         temp = num
+    #         while temp * temp in nums_set:
+    #             temp *= temp
+    #             visited.add(temp)
+    #             cur += 1
+            
+    #         if cur > 1:
+    #             res = max(res, cur)
+        
+    #     return res
 
         
 def main():
