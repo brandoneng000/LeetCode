@@ -2,14 +2,26 @@ from typing import List
 
 class Solution:
     def largestCombination(self, candidates: List[int]) -> int:
-        n = 32
-        res = [0] * n
+        res = 0
 
-        for num in candidates:
-            for i in range(n):
-                res[i] += (num >> i) & 1
+        for i in range(32):
+            cur = 0
 
-        return max(res)
+            for num in candidates:
+                cur += (num >> i) & 1
+            res = max(res, cur)
+
+        return res
+
+    # def largestCombination(self, candidates: List[int]) -> int:
+    #     n = 32
+    #     res = [0] * n
+
+    #     for num in candidates:
+    #         for i in range(n):
+    #             res[i] += (num >> i) & 1
+
+    #     return max(res)
     
 def main():
     sol = Solution()
