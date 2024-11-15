@@ -2,22 +2,42 @@ from typing import List
 
 class Solution:
     def findLengthOfShortestSubarray(self, arr: List[int]) -> int:
-        arr = [0] + arr + [float('inf')]
+        n = len(arr)
+        right = n - 1
+        
+        while right > 0 and arr[right] >= arr[right - 1]:
+            right -= 1
 
+        res = right
         left = 0
-        right = len(arr) - 1
-        res = len(arr) - 1
 
-        while left < len(arr) - 2 and arr[left] <= arr[left + 1]:
-            left += 1
-
-        while left >= 0:
-            while right - 1 > left and arr[right - 1] >= arr[left] and arr[right] >= arr[right - 1]:
-                right -= 1
+        while left < right and (left == 0 or arr[left - 1] <= arr[left]):
+            while right < n and arr[left] > arr[right]:
+                right += 1
+            
             res = min(res, right - left - 1)
-            left -= 1
+            left += 1
         
         return res
+
+
+    # def findLengthOfShortestSubarray(self, arr: List[int]) -> int:
+    #     arr = [0] + arr + [float('inf')]
+
+    #     left = 0
+    #     right = len(arr) - 1
+    #     res = len(arr) - 1
+
+    #     while left < len(arr) - 2 and arr[left] <= arr[left + 1]:
+    #         left += 1
+
+    #     while left >= 0:
+    #         while right - 1 > left and arr[right - 1] >= arr[left] and arr[right] >= arr[right - 1]:
+    #             right -= 1
+    #         res = min(res, right - left - 1)
+    #         left -= 1
+        
+    #     return res
         
 def main():
     sol = Solution()
