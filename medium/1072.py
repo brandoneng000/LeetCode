@@ -1,15 +1,31 @@
 from typing import List
-import collections
+# import collections
+from collections import Counter
 
 class Solution:
     def maxEqualRowsAfterFlips(self, matrix: List[List[int]]) -> int:
-        data = collections.defaultdict(int)
+        count = Counter()
 
         for row in matrix:
-            data[tuple(row)] += 1
-            data[tuple(1 - val for val in row)] += 1
+            if row[0] == 1:
+                cur = tuple(row)
+            else:
+                cur = tuple([1 - bit for bit in row])
+            
+            count[cur] += 1
         
-        return max(data.values())
+        return max(count.values())
+
+
+
+    # def maxEqualRowsAfterFlips(self, matrix: List[List[int]]) -> int:
+    #     data = collections.defaultdict(int)
+
+    #     for row in matrix:
+    #         data[tuple(row)] += 1
+    #         data[tuple(1 - val for val in row)] += 1
+        
+    #     return max(data.values())
 
 def main():
     sol = Solution()
