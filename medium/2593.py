@@ -3,25 +3,44 @@ from heapq import heappush, heappop
 
 class Solution:
     def findScore(self, nums: List[int]) -> int:
-        marked = set()
+        n = len(nums)
+        marked = [False] * n
+        sorted_nums = sorted([(num, index) for index, num in enumerate(nums)])
         res = 0
-        heap = []
 
-        for index, num in enumerate(nums):
-            heappush(heap, (num, index))
+        for i in range(n):
+            num, index = sorted_nums[i]
 
-        while heap:
-            num, index = heappop(heap)
-
-            if index in marked:
-                continue
-
-            res += num
-            marked.add(index)
-            marked.add(index + 1)
-            marked.add(index - 1)
-        
+            if not marked[index]:
+                res += num
+                marked[index] = True
+                if index + 1 < n:
+                    marked[index + 1] = True
+                if index - 1 >= 0:
+                    marked[index - 1] = True
+            
         return res
+
+    # def findScore(self, nums: List[int]) -> int:
+    #     marked = set()
+    #     res = 0
+    #     heap = []
+
+    #     for index, num in enumerate(nums):
+    #         heappush(heap, (num, index))
+
+    #     while heap:
+    #         num, index = heappop(heap)
+
+    #         if index in marked:
+    #             continue
+
+    #         res += num
+    #         marked.add(index)
+    #         marked.add(index + 1)
+    #         marked.add(index - 1)
+        
+    #     return res
         
 def main():
     sol = Solution()
