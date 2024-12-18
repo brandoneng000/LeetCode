@@ -1,11 +1,18 @@
 class Solution:
     def isPrefixOfWord(self, sentence: str, searchWord: str) -> int:
-
-        for index, word in enumerate(sentence.split()):
-            if word[:len(searchWord)] == searchWord:
-                return index + 1
+        for i, word in enumerate(sentence.split(), 1):
+            if word.startswith(searchWord):
+                return i
         
         return -1
+
+    # def isPrefixOfWord(self, sentence: str, searchWord: str) -> int:
+
+    #     for index, word in enumerate(sentence.split()):
+    #         if word[:len(searchWord)] == searchWord:
+    #             return index + 1
+        
+    #     return -1
 
         
 def main():

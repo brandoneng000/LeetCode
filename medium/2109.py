@@ -3,12 +3,25 @@ from typing import List
 class Solution:
     def addSpaces(self, s: str, spaces: List[int]) -> str:
         n = len(s)
-        res = list(s)
+        spaces_set = set(spaces)
+        res = []
 
-        for i in spaces:
-            res[i] = ' ' + res[i]
+        for i in range(n):
+            if i in spaces_set:
+                res.append(' ')
+            res.append(s[i])
         
-        return "".join(res)
+        return ''.join(res)
+
+
+    # def addSpaces(self, s: str, spaces: List[int]) -> str:
+    #     n = len(s)
+    #     res = list(s)
+
+    #     for i in spaces:
+    #         res[i] = ' ' + res[i]
+        
+    #     return "".join(res)
 
 
 
