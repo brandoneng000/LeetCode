@@ -1,15 +1,30 @@
 from typing import List
+from collections import deque
 
 class Solution:
     def finalPrices(self, prices: List[int]) -> List[int]:
+        n = len(prices)
+        res = prices[::]
+        stack = deque()
+
+        for i in range(n):
+            while stack and prices[stack[-1]] >= prices[i]:
+                res[stack.pop()] -= prices[i]
+            
+            stack.append(i)
         
-        for index in range(len(prices)):
-            for discount in range(index + 1, len(prices)):
-                if prices[discount] <= prices[index]:
-                    prices[index] -= prices[discount]
-                    break
+        return res
+
+
+    # def finalPrices(self, prices: List[int]) -> List[int]:
         
-        return prices
+    #     for index in range(len(prices)):
+    #         for discount in range(index + 1, len(prices)):
+    #             if prices[discount] <= prices[index]:
+    #                 prices[index] -= prices[discount]
+    #                 break
+        
+    #     return prices
 
 def main():
     sol = Solution()
