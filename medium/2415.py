@@ -9,18 +9,43 @@ class TreeNode:
         self.right = right
 class Solution:
     def reverseOddLevels(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        def dfs(node1: TreeNode, node2: TreeNode, level: int):
-            if not node1 or not node2:
-                return
-            
+        q = deque([root])
+        level = 0
+
+        while q:
             if level % 2:
-                node1.val, node2.val = node2.val, node1.val
+                vals = [node.val for node in q][::-1]
+
+                for node, num in zip(q, vals):
+                    node.val = num
             
-            dfs(node1.left, node2.right, level + 1)
-            dfs(node1.right, node2.left, level + 1)
-        
-        dfs(root.left, root.right, 1)
+            for _ in range(len(q)):
+                node = q.popleft()
+
+                if node.left:
+                    q.append(node.left)
+                
+                if node.right:
+                    q.append(node.right)
+
+            level += 1
+
+
         return root
+    
+    # def reverseOddLevels(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+    #     def dfs(node1: TreeNode, node2: TreeNode, level: int):
+    #         if not node1 or not node2:
+    #             return
+            
+    #         if level % 2:
+    #             node1.val, node2.val = node2.val, node1.val
+            
+    #         dfs(node1.left, node2.right, level + 1)
+    #         dfs(node1.right, node2.left, level + 1)
+        
+    #     dfs(root.left, root.right, 1)
+    #     return root
 
 
     # def reverseOddLevels(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
