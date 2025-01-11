@@ -1,21 +1,39 @@
-import collections
+# import collections
+from collections import Counter
 
 class Solution:
     def canConstruct(self, s: str, k: int) -> bool:
-        if len(set(s)) == k:
+        n = len(s)
+
+        if n < k:
+            return False
+        if n == k:
             return True
         
-        letter_count = collections.Counter(s)
-        odds = 0
+        count = Counter(s)
+        odd = 0
 
-        for letter in letter_count:
-            if letter_count[letter] % 2:
-                odds += 1
+        for letter in count:
+            if count[letter] % 2:
+                odd += 1
         
-        if odds <= k:
-            return len(s) >= k
-        else:
-            return False
+        return odd <= k
+
+    # def canConstruct(self, s: str, k: int) -> bool:
+    #     if len(set(s)) == k:
+    #         return True
+        
+    #     letter_count = collections.Counter(s)
+    #     odds = 0
+
+    #     for letter in letter_count:
+    #         if letter_count[letter] % 2:
+    #             odds += 1
+        
+    #     if odds <= k:
+    #         return len(s) >= k
+    #     else:
+    #         return False
 
 
         
