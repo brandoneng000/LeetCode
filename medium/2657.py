@@ -3,18 +3,31 @@ from collections import Counter
 
 class Solution:
     def findThePrefixCommonArray(self, A: List[int], B: List[int]) -> List[int]:
+        set_a = set()
+        set_b = set()
         res = []
-        seen = set()
-        cur = 0
 
-        for ab in zip(A, B):
-            for num in ab:
-                if num in seen:
-                    cur += 1
-                seen.add(num)
-            res.append(cur)
+        for a, b in zip(A, B):
+            set_a.add(a)
+            set_b.add(b)
+            res.append(len(set_a.intersection(set_b)))
         
         return res
+        
+
+    # def findThePrefixCommonArray(self, A: List[int], B: List[int]) -> List[int]:
+    #     res = []
+    #     seen = set()
+    #     cur = 0
+
+    #     for ab in zip(A, B):
+    #         for num in ab:
+    #             if num in seen:
+    #                 cur += 1
+    #             seen.add(num)
+    #         res.append(cur)
+        
+    #     return res
 
 
     # def findThePrefixCommonArray(self, A: List[int], B: List[int]) -> List[int]:
