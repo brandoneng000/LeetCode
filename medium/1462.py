@@ -1,19 +1,46 @@
 from typing import List
-import collections
+from collections import defaultdict, deque
+# import collections
+
 
 class Solution:
     def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
-        courses = [[False] * numCourses for i in range(numCourses)]
+        def bfs(num_courses: int, graph: defaultdict, courses_prereq: List[List[bool]]):
+            for i in range(num_courses):
+                q = deque([i])
+
+                while q:
+                    node = q.popleft()
+
+                    for nei in graph[node]:
+                        if not courses_prereq[i][nei]:
+                            courses_prereq[i][nei] = True
+                            q.append(nei)
+
+
+        course_graph = defaultdict(set)
+        courses_prereq = [[False] * numCourses for _ in range(numCourses)]
 
         for a, b in prerequisites:
-            courses[a][b] = True
+            course_graph[a].add(b)
+
+        bfs(numCourses, course_graph, courses_prereq)
+
+        return [courses_prereq[a][b] for a, b in queries]
+
+
+    # def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
+    #     courses = [[False] * numCourses for i in range(numCourses)]
+
+    #     for a, b in prerequisites:
+    #         courses[a][b] = True
         
-        for k in range(numCourses):
-            for i in range(numCourses):
-                for j in range(numCourses):
-                    courses[i][j] = courses[i][j] or (courses[i][k] and courses[k][j])
+    #     for k in range(numCourses):
+    #         for i in range(numCourses):
+    #             for j in range(numCourses):
+    #                 courses[i][j] = courses[i][j] or (courses[i][k] and courses[k][j])
         
-        return [courses[i][j] for i, j in queries]
+    #     return [courses[i][j] for i, j in queries]
 
 
     # def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
