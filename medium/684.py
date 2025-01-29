@@ -3,21 +3,41 @@ import collections
 
 class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
-        graph = collections.defaultdict(set)
+        def find_root(node: int):
+            if root[node] != node:
+                root[node] = find_root(root[node])
+            return root[node]
 
-        def dfs(source, target):
-            if source not in seen:
-                seen.add(source)
-                if source == target:
-                    return True
-                return any(dfs(next, target) for next in graph[source])
+        n = len(edges)
+        root = list(range(n + 1))
+
+        for a, b in edges:
+            root1 = find_root(a)
+            root2 = find_root(b)
+
+            if root1 == root2:
+                return [a, b]
+            
+            root[root2] = root1
         
-        for start, end in edges:
-            seen = set()
-            if start in graph and end in graph and dfs(start, end):
-                return [start, end]
-            graph[start].add(end)
-            graph[end].add(start)
+
+
+    # def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
+    #     graph = collections.defaultdict(set)
+
+    #     def dfs(source, target):
+    #         if source not in seen:
+    #             seen.add(source)
+    #             if source == target:
+    #                 return True
+    #             return any(dfs(next, target) for next in graph[source])
+        
+    #     for start, end in edges:
+    #         seen = set()
+    #         if start in graph and end in graph and dfs(start, end):
+    #             return [start, end]
+    #         graph[start].add(end)
+    #         graph[end].add(start)
 
     # def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
     #     self.graph = collections.defaultdict(list)
