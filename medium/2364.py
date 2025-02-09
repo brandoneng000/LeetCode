@@ -4,14 +4,26 @@ from collections import Counter
 class Solution:
     def countBadPairs(self, nums: List[int]) -> int:
         n = len(nums)
-        count = Counter()
-        res = 0
+        count = Counter(nums[i] - i for i in range(n))
+        res = n * (n - 1) // 2
 
-        for i in range(n):
-            res += count[nums[i] - i]
-            count[nums[i] - i] += 1
+        for key, val in count.items():
+            if val != 1:
+                res -= val * (val - 1) // 2
         
-        return (n * (n - 1) // 2) - res
+        return res
+
+
+    # def countBadPairs(self, nums: List[int]) -> int:
+    #     n = len(nums)
+    #     count = Counter()
+    #     res = 0
+
+    #     for i in range(n):
+    #         res += count[nums[i] - i]
+    #         count[nums[i] - i] += 1
+        
+    #     return (n * (n - 1) // 2) - res
         
         
 def main():
