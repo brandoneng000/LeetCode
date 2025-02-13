@@ -1,19 +1,31 @@
 from typing import List
-from heapq import heappush, heappop, heapify
+from heapq import heappush, heappop, heapify, heappushpop
 
 class Solution:
     def minOperations(self, nums: List[int], k: int) -> int:
         res = 0
         heapify(nums)
+        cur = heappop(nums)
 
-        while len(nums) > 1 and nums[0] < k:
+        while cur < k:
+            next = 2 * cur + heappop(nums)
+            cur = heappushpop(nums, next)
             res += 1
-            x = heappop(nums)
-            y = heappop(nums)
-
-            heappush(nums, x * 2 + y)
-    
+        
         return res
+
+    # def minOperations(self, nums: List[int], k: int) -> int:
+    #     res = 0
+    #     heapify(nums)
+
+    #     while len(nums) > 1 and nums[0] < k:
+    #         res += 1
+    #         x = heappop(nums)
+    #         y = heappop(nums)
+
+    #         heappush(nums, x * 2 + y)
+    
+    #     return res
 
         
 def main():
