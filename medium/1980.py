@@ -2,13 +2,22 @@ from typing import List
 
 class Solution:
     def findDifferentBinaryString(self, nums: List[str]) -> str:
-        res = []
+        n = 2 ** len(nums[0])
+        nums_set = set(int(bits, 2) for bits in nums)
 
-        for i in range(len(nums)):
-            cur = nums[i][i]
-            res.append('1' if cur == '0' else '0')
+        for i in range(n):
+            if i not in nums_set:
+                return bin(i)[2:].zfill(len(nums[0]))
+
+
+    # def findDifferentBinaryString(self, nums: List[str]) -> str:
+    #     res = []
+
+    #     for i in range(len(nums)):
+    #         cur = nums[i][i]
+    #         res.append('1' if cur == '0' else '0')
         
-        return "".join(res)
+    #     return "".join(res)
     
     # def findDifferentBinaryString(self, nums: List[str]) -> str:
     #     def gen_binary(cur: List[str]):
