@@ -2,20 +2,35 @@ from typing import List
 
 class Solution:
     def pivotArray(self, nums: List[int], pivot: int) -> List[int]:
-        n = len(nums)
         left = []
         right = []
-        pivot_count = 0
+        center = []
 
-        for i in range(n):
-            if nums[i] == pivot:
-                pivot_count += 1
-            elif nums[i] < pivot:
-                left.append(nums[i])
+        for num in nums:
+            if num == pivot:
+                center.append(num)
+            elif num < pivot:
+                left.append(num)
             else:
-                right.append(nums[i])
+                right.append(num)
         
-        return left + [pivot] * pivot_count + right
+        return left + center + right
+        
+    # def pivotArray(self, nums: List[int], pivot: int) -> List[int]:
+    #     n = len(nums)
+    #     left = []
+    #     right = []
+    #     pivot_count = 0
+
+    #     for i in range(n):
+    #         if nums[i] == pivot:
+    #             pivot_count += 1
+    #         elif nums[i] < pivot:
+    #             left.append(nums[i])
+    #         else:
+    #             right.append(nums[i])
+        
+    #     return left + [pivot] * pivot_count + right
 
         
 def main():
