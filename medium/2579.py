@@ -1,11 +1,17 @@
 class Solution:
     def coloredCells(self, n: int) -> int:
-        res = 1
+        return 1 + n * (n - 1) * 2
 
-        for i in range(1, n):
-            res += 4 * i
+    # def coloredCells(self, n: int) -> int:
+    #     return 1 + sum(4 * i for i in range(n))
+
+    # def coloredCells(self, n: int) -> int:
+    #     res = 1
+
+    #     for i in range(1, n):
+    #         res += 4 * i
         
-        return res
+    #     return res
         
 def main():
     sol = Solution()
