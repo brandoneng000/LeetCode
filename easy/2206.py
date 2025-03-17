@@ -1,10 +1,14 @@
 from typing import List
-import collections
+from collections import Counter
+# import collections
 
 class Solution:
     def divideArray(self, nums: List[int]) -> bool:
-        nums_count = collections.Counter(nums)
-        return all(not nums_count[key] % 2 for key in nums_count)
+        return all(not count % 2 for key, count in Counter(nums).items())
+
+    # def divideArray(self, nums: List[int]) -> bool:
+    #     nums_count = collections.Counter(nums)
+    #     return all(not nums_count[key] % 2 for key in nums_count)
 
 
 def main():
