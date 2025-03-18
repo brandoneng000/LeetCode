@@ -3,19 +3,35 @@ from typing import List
 class Solution:
     def longestNiceSubarray(self, nums: List[int]) -> int:
         n = len(nums)
-        res = 0
-        cur = 0
-        left = 0
-        
-        for right in range(n):
-            while left < right and cur & nums[right]:
-                cur ^= nums[left]
-                left += 1
-            
-            res = max(res, right - left + 1)
-            cur |= nums[right]
+        res = 1
 
+        for i in range(n):
+            cur = nums[i]
+            for j in range(i + 1, n):
+                if cur & nums[j] != 0:
+                    break
+
+                cur |= nums[j]
+                res = max(res, j - i + 1)
+        
         return res
+
+
+    # def longestNiceSubarray(self, nums: List[int]) -> int:
+    #     n = len(nums)
+    #     res = 0
+    #     cur = 0
+    #     left = 0
+        
+    #     for right in range(n):
+    #         while left < right and cur & nums[right]:
+    #             cur ^= nums[left]
+    #             left += 1
+            
+    #         res = max(res, right - left + 1)
+    #         cur |= nums[right]
+
+    #     return res
 
 
         
