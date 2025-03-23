@@ -22,6 +22,9 @@ class Solution:
         while heap:
             prev_time, node = heappop(heap)
 
+            if prev_time > times[node]:
+                continue
+
             for next, time in graph[node]:
                 new_time = time + prev_time
 
@@ -30,10 +33,40 @@ class Solution:
                     ways[next] = ways[node]
                     heappush(heap, (new_time, next))
                 elif new_time == times[next]:
-                    ways[next] += ways[node]
+                    ways[next] = (ways[next] + ways[node]) % mod
         
-        return ways[n - 1] % mod
+        return ways[n - 1]
+    
+    # def countPaths(self, n: int, roads: List[List[int]]) -> int:
+    #     mod = 1000000007
+    #     graph = defaultdict(list)
+        
+    #     for u, v, time in roads:
+    #         graph[u].append((v, time))
+    #         graph[v].append((u, time))
 
+    #     times = [float('inf') for _ in range(n)]
+    #     ways = [0 for _ in range(n)]
+
+    #     times[0] = 0
+    #     ways[0] = 1
+
+    #     heap = [(0, 0)]
+
+    #     while heap:
+    #         prev_time, node = heappop(heap)
+
+    #         for next, time in graph[node]:
+    #             new_time = time + prev_time
+
+    #             if new_time < times[next]:
+    #                 times[next] = new_time
+    #                 ways[next] = ways[node]
+    #                 heappush(heap, (new_time, next))
+    #             elif new_time == times[next]:
+    #                 ways[next] = (ways[next] + ways[node]) % mod
+        
+    #     return ways[n - 1]
         
 def main():
     sol = Solution()
