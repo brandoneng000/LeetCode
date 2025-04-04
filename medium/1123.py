@@ -8,21 +8,38 @@ class TreeNode:
         self.right = right
 class Solution:
     def lcaDeepestLeaves(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        self.res = None
-        self.max_depth = 0
-
-        def dfs(root: TreeNode, depth: int):
+        def dfs(root: TreeNode):
             if not root:
-                return depth - 1
+                return [0, None]
             
-            self.max_depth = max(self.max_depth, depth)
-            left = dfs(root.left, depth + 1)
-            right = dfs(root.right, depth + 1)
+            left_depth, left = dfs(root.left)
+            right_depth, right = dfs(root.right)
 
-            if left == right == self.max_depth:
-                self.res = root
+            if left_depth > right_depth:
+                return left_depth + 1, left
+            elif left_depth < right_depth:
+                return right_depth + 1, right
             
-            return max(left, right)
+            return left_depth + 1, root
         
-        dfs(root, 0)
-        return self.res
+        return dfs(root)[1]
+
+    # def lcaDeepestLeaves(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+    #     self.res = None
+    #     self.max_depth = 0
+
+    #     def dfs(root: TreeNode, depth: int):
+    #         if not root:
+    #             return depth - 1
+            
+    #         self.max_depth = max(self.max_depth, depth)
+    #         left = dfs(root.left, depth + 1)
+    #         right = dfs(root.right, depth + 1)
+
+    #         if left == right == self.max_depth:
+    #             self.res = root
+            
+    #         return max(left, right)
+        
+    #     dfs(root, 0)
+    #     return self.res
