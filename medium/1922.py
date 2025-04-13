@@ -1,17 +1,21 @@
 class Solution:
     def countGoodNumbers(self, n: int) -> int:
         mod = 1000000007
-        res = 5 ** (n % 2)
-        x = 20
-        i = n // 2
+        return pow(5, (n + 1) // 2, mod) * pow(4, n // 2, mod) % mod
 
-        while i > 0:
-            if i % 2 == 1:
-                res = res * x % mod
-            x = x * x % mod
-            i //= 2
+    # def countGoodNumbers(self, n: int) -> int:
+    #     mod = 1000000007
+    #     res = 5 ** (n % 2)
+    #     x = 20
+    #     i = n // 2
+
+    #     while i > 0:
+    #         if i % 2 == 1:
+    #             res = res * x % mod
+    #         x = x * x % mod
+    #         i //= 2
         
-        return res
+    #     return res
         
 def main():
     sol = Solution()
