@@ -2,48 +2,71 @@ from typing import List
 
 class Solution:
     def countGoodTriplets(self, arr: List[int], a: int, b: int, c: int) -> int:
-        # result = []
-        
-        # def checkTriplets(stack: List[int]):
-        #     if abs(stack[0] - stack[1]) > a:
-        #         return False
-        #     elif abs(stack[1] - stack[2]) > b:
-        #         return False
-        #     elif abs(stack[0] - stack[2]) > c:
-        #         return False
-        #     return True
+        n = len(arr)
+        res = 0
+        total = [0] * 1001
 
-        # def findGoodTriplets(arr: List[int], stack: List[int], index: int):
-        #     if len(stack) == 3:
-        #         if checkTriplets(stack):
-        #             result.append(stack.copy())
-        #         else:
-        #             return
+        for i in range(n):
+            for j in range(i + 1, n):
+                if abs(arr[i] - arr[j]) <= b:
+                    li, ri = arr[i] - a, arr[i] + a
+                    lj, rj = arr[j] - c, arr[j] + c
+                    left = max(0, li, lj)
+                    right = min(1000, ri, rj)
+                
+                    if left <= right:
+                        res += total[right] if left == 0 else total[right] - total[left - 1]
+
+            for j in range(arr[i], 1001):
+                total[j] += 1
+        
+        return res
+
+    # def countGoodTriplets(self, arr: List[int], a: int, b: int, c: int) -> int:
+    #     result = []
+        
+    #     def checkTriplets(stack: List[int]):
+    #         if abs(stack[0] - stack[1]) > a:
+    #             return False
+    #         elif abs(stack[1] - stack[2]) > b:
+    #             return False
+    #         elif abs(stack[0] - stack[2]) > c:
+    #             return False
+    #         return True
+
+    #     def findGoodTriplets(arr: List[int], stack: List[int], index: int):
+    #         if len(stack) == 3:
+    #             if checkTriplets(stack):
+    #                 result.append(stack.copy())
+    #             else:
+    #                 return
             
-        #     for i in range(index, len(arr)):
-        #         stack.append(arr[i])
-        #         findGoodTriplets(arr, stack, i + 1)
-        #         stack.pop()
+    #         for i in range(index, len(arr)):
+    #             stack.append(arr[i])
+    #             findGoodTriplets(arr, stack, i + 1)
+    #             stack.pop()
         
-        # findGoodTriplets(arr, [], 0)
-        # return len(result)
-        def checkTriplet(first: int, second: int, third: int) -> bool:
-            if abs(first - second) > a:
-                return False
-            elif abs(second - third) > b:
-                return False
-            elif abs(first - third) > c:
-                return False
-            return True
+    #     findGoodTriplets(arr, [], 0)
+    #     return len(result)
+    
+    # def countGoodTriplets(self, arr: List[int], a: int, b: int, c: int) -> int:
+    #     def checkTriplet(first: int, second: int, third: int) -> bool:
+    #         if abs(first - second) > a:
+    #             return False
+    #         elif abs(second - third) > b:
+    #             return False
+    #         elif abs(first - third) > c:
+    #             return False
+    #         return True
 
-        result = 0
-        size = len(arr)
-        for i in range(size):
-            for j in range(i + 1, size):
-                for k in range(j + 1, size):
-                    result += checkTriplet(arr[i], arr[j], arr[k])
+    #     result = 0
+    #     size = len(arr)
+    #     for i in range(size):
+    #         for j in range(i + 1, size):
+    #             for k in range(j + 1, size):
+    #                 result += checkTriplet(arr[i], arr[j], arr[k])
         
-        return result
+    #     return result
 
 
 def main():
