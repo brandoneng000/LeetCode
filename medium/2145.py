@@ -2,20 +2,33 @@ from typing import List
 
 class Solution:
     def numberOfArrays(self, differences: List[int], lower: int, upper: int) -> int:
-        n = len(differences)
-        prefix = [0]
+        low = high = cur = 0
 
-        for i in range(n):
-            prefix.append(prefix[-1] + differences[i])
-        
-        low, high = min(prefix), max(prefix)
-        lower_bound = lower - low
-        upper_bound = upper - high
+        for diff in differences:
+            cur += diff
+            low = min(low, cur)
+            high = max(high, cur)
 
-        if lower_bound > upper_bound:
-            return 0
+            if high - low > upper - lower:
+                return 0
         
-        return upper_bound - lower_bound + 1
+        return (upper - lower) - (high - low) + 1
+
+    # def numberOfArrays(self, differences: List[int], lower: int, upper: int) -> int:
+    #     n = len(differences)
+    #     prefix = [0]
+
+    #     for i in range(n):
+    #         prefix.append(prefix[-1] + differences[i])
+        
+    #     low, high = min(prefix), max(prefix)
+    #     lower_bound = lower - low
+    #     upper_bound = upper - high
+
+    #     if lower_bound > upper_bound:
+    #         return 0
+        
+    #     return upper_bound - lower_bound + 1
         
 def main():
     sol = Solution()
