@@ -3,22 +3,40 @@ from typing import List
 class Solution:
     def countSubarrays(self, nums: List[int], k: int) -> int:
         n = len(nums)
-        count = 0
         max_ele = max(nums)
-        left = 0
+        indices_max_ele = []
         res = 0
 
-        for right in range(n):
-            if max_ele == nums[right]:
-                count += 1
-            while count == k:
-                if nums[left] == max_ele:
-                    count -= 1
-                left += 1
+        for i in range(n):
+            if max_ele == nums[i]:
+                indices_max_ele.append(i)
             
-            res += left
+            freq = len(indices_max_ele)
 
+            if freq >= k:
+                res += indices_max_ele[-k] + 1
+        
         return res
+
+
+    # def countSubarrays(self, nums: List[int], k: int) -> int:
+    #     n = len(nums)
+    #     count = 0
+    #     max_ele = max(nums)
+    #     left = 0
+    #     res = 0
+
+    #     for right in range(n):
+    #         if max_ele == nums[right]:
+    #             count += 1
+    #         while count == k:
+    #             if nums[left] == max_ele:
+    #                 count -= 1
+    #             left += 1
+            
+    #         res += left
+
+    #     return res
         
 def main():
     sol = Solution()
