@@ -2,16 +2,29 @@ from typing import List
 
 class Solution:
     def findNumbers(self, nums: List[int]) -> int:
-        # nums = [str(num) for num in nums]
-        # result = 0
+        return sum(10 <= num <= 99 or 1000 <= num <= 9999 or num == 100000 for num in nums)
 
-        # for num in nums:
-        #     if not len(num) % 2:
-        #         result += 1
+    # def findNumbers(self, nums: List[int]) -> int:
+    #     res = 0
 
-        # return result
+    #     for num in nums:
+    #         if 10 <= num <= 99 or 1000 <= num <= 9999 or num == 100000:
+    #             res += 1
+        
+    #     return res
 
-        return sum([not len(str(num)) % 2 for num in nums])
+    # def findNumbers(self, nums: List[int]) -> int:
+    #     nums = [str(num) for num in nums]
+    #     result = 0
+
+    #     for num in nums:
+    #         if not len(num) % 2:
+    #             result += 1
+
+    #     return result
+
+    # def findNumbers(self, nums: List[int]) -> int:
+    #     return sum([not len(str(num)) % 2 for num in nums])
 
 def main():
     sol = Solution()
