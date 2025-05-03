@@ -3,11 +3,34 @@ import collections
 
 class Solution:
     def minDominoRotations(self, tops: List[int], bottoms: List[int]) -> int:
-        for val in [tops[0], bottoms[0]]:
-            if all(val in domino for domino in zip(tops, bottoms)):
-                return len(tops) - max(tops.count(val), bottoms.count(val))
+        def get_rotation(tops: List[int], bottoms: List[int], target: int):
+            n = len(tops)
+            rotate_top = rotate_bottom = 0
+
+            for i in range(n):
+                if tops[i] != target and bottoms[i] != target:
+                    return float('inf')
+                if tops[i] != target:
+                    rotate_top += 1
+                if bottoms[i] != target:
+                    rotate_bottom += 1
+            
+            return min(rotate_top, rotate_bottom)
         
-        return -1
+        res = get_rotation(tops, bottoms, tops[0])
+
+        if bottoms[0] != tops[0]:
+            res = min(res, get_rotation(tops, bottoms, bottoms[0]))
+        
+        return -1 if res == float('inf') else res
+
+
+    # def minDominoRotations(self, tops: List[int], bottoms: List[int]) -> int:
+    #     for val in [tops[0], bottoms[0]]:
+    #         if all(val in domino for domino in zip(tops, bottoms)):
+    #             return len(tops) - max(tops.count(val), bottoms.count(val))
+        
+    #     return -1
 
     # def minDominoRotations(self, tops: List[int], bottoms: List[int]) -> int:
     #     dominos = collections.defaultdict(list)
