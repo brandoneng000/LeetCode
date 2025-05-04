@@ -3,17 +3,28 @@ from typing import List
 class Solution:
     def numEquivDominoPairs(self, dominoes: List[List[int]]) -> int:
         domino_count = {}
-        result = 0
+        res = 0
 
         for domino in dominoes:
-            d = (min(domino), max(domino))
+            d = tuple(sorted(domino))
+            res += domino_count.get(d, 0)
             domino_count[d] = domino_count.get(d, 0) + 1
         
-        n = max(domino_count.values()) - 1
-        for count in domino_count.values():
-            n = count - 1
-            result += n * (n + 1) // 2
-        return result
+        return res
+
+    # def numEquivDominoPairs(self, dominoes: List[List[int]]) -> int:
+    #     domino_count = {}
+    #     result = 0
+
+    #     for domino in dominoes:
+    #         d = (min(domino), max(domino))
+    #         domino_count[d] = domino_count.get(d, 0) + 1
+        
+    #     n = max(domino_count.values()) - 1
+    #     for count in domino_count.values():
+    #         n = count - 1
+    #         result += n * (n + 1) // 2
+    #     return result
         
 
 def main():
