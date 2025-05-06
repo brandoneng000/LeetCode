@@ -1,24 +1,40 @@
 from typing import List
 
 class Solution:
+    # def buildArray(self, nums: List[int]) -> List[int]:
+    #     n = len(nums)
+
+    #     for i in range(n):
+    #         nums[i] += 10000 * (nums[nums[i]] % 10000)
+        
+    #     for i in range(n):
+    #         nums[i] //= 10000
+        
+    #     return nums
+
     def buildArray(self, nums: List[int]) -> List[int]:
-        # result = [None] * len(nums)
-        
-        # for index in range(len(nums)):
-        #     result[index] = nums[nums[index]]
-        
-        # return result
-        size = len(nums)
+        return [nums[nums[i]] for i in range(len(nums))]
 
-        for index in range(size):
-            remainder = nums[index]
-            product = nums[nums[index]] % size
-            nums[index] = size * product + remainder
+    # def buildArray(self, nums: List[int]) -> List[int]:
+    #     result = [None] * len(nums)
         
-        for index in range(size):
-            nums[index] //= size
+    #     for index in range(len(nums)):
+    #         result[index] = nums[nums[index]]
+        
+    #     return result
 
-        return nums
+    # def buildArray(self, nums: List[int]) -> List[int]:
+    #     size = len(nums)
+
+    #     for index in range(size):
+    #         remainder = nums[index]
+    #         product = nums[nums[index]] % size
+    #         nums[index] = size * product + remainder
+        
+    #     for index in range(size):
+    #         nums[index] //= size
+
+    #     return nums
 
 def main():
     sol = Solution()
