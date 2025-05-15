@@ -2,15 +2,18 @@ from typing import List
 
 class Solution:
     def getLongestSubsequence(self, words: List[str], groups: List[int]) -> List[str]:
-        res = []
-        prev = ''
+        return [words[0]] + [words[i] for i in range(1, len(groups)) if groups[i] != groups[i - 1]]
 
-        for word, bit in zip(words, groups):
-            if prev != bit:
-                res.append(word)
-                prev = bit
+    # def getLongestSubsequence(self, words: List[str], groups: List[int]) -> List[str]:
+    #     res = []
+    #     prev = ''
 
-        return res
+    #     for word, bit in zip(words, groups):
+    #         if prev != bit:
+    #             res.append(word)
+    #             prev = bit
+
+    #     return res
 
         
 def main():
