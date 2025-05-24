@@ -2,7 +2,10 @@ from typing import List
 
 class Solution:
     def findWordsContaining(self, words: List[str], x: str) -> List[int]:
-        return [i for i in range(len(words)) if x in words[i]]
+        return [i for i, word in enumerate(words) if x in word]
+
+    # def findWordsContaining(self, words: List[str], x: str) -> List[int]:
+    #     return [i for i in range(len(words)) if x in words[i]]
         
 def main():
     sol = Solution()
