@@ -1,14 +1,17 @@
 class Solution:
     def differenceOfSums(self, n: int, m: int) -> int:
-        num1 = num2 = 0
+        return sum(range(n + 1)) - 2 * sum(range(0, n + 1, m))
 
-        for i in range(1, n + 1):
-            if i % m:
-                num1 += i
-            else:
-                num2 += i
+    # def differenceOfSums(self, n: int, m: int) -> int:
+    #     num1 = num2 = 0
+
+    #     for i in range(1, n + 1):
+    #         if i % m:
+    #             num1 += i
+    #         else:
+    #             num2 += i
         
-        return num1 - num2
+    #     return num1 - num2
         
     # def differenceOfSums(self, n: int, m: int) -> int:
     #     return sum(i for i in range(1, n + 1) if i % m) - sum(i for i in range(1, n + 1) if i % m == 0)
