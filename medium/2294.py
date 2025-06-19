@@ -3,16 +3,28 @@ from collections import Counter
 
 class Solution:
     def partitionArray(self, nums: List[int], k: int) -> int:
-        count = Counter(nums)
-        cur_cap = -1
-        res = 0
+        nums.sort()
+        res = 1
+        prev_start = nums[0]
 
-        for num in sorted(count):
-            if num > cur_cap:
+        for num in nums:
+            if num - prev_start > k:
                 res += 1
-                cur_cap = num + k
+                prev_start = num
         
         return res
+
+    # def partitionArray(self, nums: List[int], k: int) -> int:
+    #     count = Counter(nums)
+    #     cur_cap = -1
+    #     res = 0
+
+    #     for num in sorted(count):
+    #         if num > cur_cap:
+    #             res += 1
+    #             cur_cap = num + k
+        
+    #     return res
 
         
 def main():
