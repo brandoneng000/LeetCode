@@ -2,17 +2,33 @@ from typing import List
 
 class Solution:
     def findKDistantIndices(self, nums: List[int], key: int, k: int) -> List[int]:
-        res = set()
+        n = len(nums)
+        i = j = 0
+        res = []
 
-        for index, val in enumerate(nums):
-            if key == val:
-                for i in range(max(index - k, 0), min(len(nums), index + k + 1)):
-                    res.add(i)
+        while i < n:
+            if nums[i] == key:
+                while j < n and j < i + k + 1:
+                    res.append(j)
+                    j += 1
+            
+            while i - j >= k:
+                j += 1
+            
+            i += 1
         
-        return sorted(list(res))
+        return res
 
+
+    # def findKDistantIndices(self, nums: List[int], key: int, k: int) -> List[int]:
+    #     res = set()
+
+    #     for index, val in enumerate(nums):
+    #         if key == val:
+    #             for i in range(max(index - k, 0), min(len(nums), index + k + 1)):
+    #                 res.add(i)
         
-
+    #     return sorted(list(res))
 
 
 def main():
