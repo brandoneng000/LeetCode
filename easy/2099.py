@@ -4,28 +4,40 @@ import collections
 
 class Solution:
     def maxSubsequence(self, nums: List[int], k: int) -> List[int]:
-        # copy = nums.copy()
-        # size = len(copy)
-        # heapq.heapify(nums)
+        sorted_nums = sorted([[num, i] for i, num in enumerate(nums)], reverse=True)[:k]
+        sorted_nums.sort(key=lambda x: x[1])
         
-        # while size > k:
-        #     temp = heapq.heappop(nums)
-        #     copy.remove(temp)
-        #     size -= 1
+        return [num for num, i in sorted_nums]
 
-        # return copy
-        heap = nums.copy()
-        heapq.heapify(heap)
-        largest = heapq.nlargest(k, heap)
-        largest = collections.Counter(largest)
-        result = []
 
-        for num in nums:
-            if num in largest and largest[num] > 0:
-                result.append(num)
-                largest[num] -= 1
+    # def maxSubsequence(self, nums: List[int], k: int) -> List[int]:
+    #     return [num for num, i in sorted(sorted([[num, i] for i, num in enumerate(nums)], reverse=True)[:k], key=lambda x: x[1])]
 
-        return result
+    # def maxSubsequence(self, nums: List[int], k: int) -> List[int]:
+    #     copy = nums.copy()
+    #     size = len(copy)
+    #     heapq.heapify(nums)
+        
+    #     while size > k:
+    #         temp = heapq.heappop(nums)
+    #         copy.remove(temp)
+    #         size -= 1
+
+    #     return copy
+
+    # def maxSubsequence(self, nums: List[int], k: int) -> List[int]:
+    #     heap = nums.copy()
+    #     heapq.heapify(heap)
+    #     largest = heapq.nlargest(k, heap)
+    #     largest = collections.Counter(largest)
+    #     result = []
+
+    #     for num in nums:
+    #         if num in largest and largest[num] > 0:
+    #             result.append(num)
+    #             largest[num] -= 1
+
+    #     return result
 
 
 def main():
