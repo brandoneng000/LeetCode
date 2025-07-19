@@ -24,13 +24,26 @@ class Trie:
 
 class Solution:
     def removeSubfolders(self, folder: List[str]) -> List[str]:
-        folder_size = Trie()
-        res = []
-        for f in sorted(folder, key=lambda x: x.count('/')):
-            if folder_size.add_node(f.split('/')):
-                res.append(f)
+        n = len(folder)
+        folder.sort()
+        res = [folder[0]]
+
+        for i in range(1, n):
+            prev_folder = res[-1] + '/'
+
+            if not folder[i].startswith(prev_folder):
+                res.append(folder[i])
         
         return res
+
+    # def removeSubfolders(self, folder: List[str]) -> List[str]:
+    #     folder_size = Trie()
+    #     res = []
+    #     for f in sorted(folder, key=lambda x: x.count('/')):
+    #         if folder_size.add_node(f.split('/')):
+    #             res.append(f)
+        
+    #     return res
 
         
 def main():
