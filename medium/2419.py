@@ -8,11 +8,24 @@ class Solution:
         for num in nums:
             if num == largest:
                 cur += 1
-                res = max(res, cur)
             else:
+                res = max(res, cur)
                 cur = 0
         
-        return res
+        return max(res, cur)
+
+    # def longestSubarray(self, nums: List[int]) -> int:
+    #     largest = max(nums)
+    #     res = cur = 0
+
+    #     for num in nums:
+    #         if num == largest:
+    #             cur += 1
+    #             res = max(res, cur)
+    #         else:
+    #             cur = 0
+        
+    #     return res
         
 def main():
     sol = Solution()
