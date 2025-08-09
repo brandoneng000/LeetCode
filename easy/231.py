@@ -1,6 +1,6 @@
 class Solution:
     def isPowerOfTwo(self, n: int) -> bool:
-        return n and not (n & n - 1)
+        return bool(n and not (n & n - 1))
 
         # mask = 0b11111111111111111111111111111111
 
@@ -12,6 +12,7 @@ class Solution:
         
 def main():
     sol = Solution()
+    print(sol.isPowerOfTwo(0))
     print(sol.isPowerOfTwo(1))
     print(sol.isPowerOfTwo(16))
     print(sol.isPowerOfTwo(3))
