@@ -3,25 +3,41 @@ from collections import Counter
 class Solution:
     def numberOfWays(self, n: int, x: int) -> int:
         mod = 1000000007
-        dp = Counter()
+        dp = [0] * (n + 1)
         dp[0] = 1
 
         for i in range(1, n + 1):
-            num = i ** x
+            val = i ** x
 
-            if num > n:
+            if val > n:
                 break
 
-            next_dp = Counter()
-
-            for j in sorted(dp):
-                if num + j > n:
-                    break
-                next_dp[num + j] = (next_dp[num + j] + dp[j]) % mod
+            for j in range(n, val - 1, -1):
+                dp[j] = (dp[j] + dp[j - val]) % mod
             
-            dp.update(next_dp)
+        return dp[n]
+
+    # def numberOfWays(self, n: int, x: int) -> int:
+    #     mod = 1000000007
+    #     dp = Counter()
+    #     dp[0] = 1
+
+    #     for i in range(1, n + 1):
+    #         num = i ** x
+
+    #         if num > n:
+    #             break
+
+    #         next_dp = Counter()
+
+    #         for j in sorted(dp):
+    #             if num + j > n:
+    #                 break
+    #             next_dp[num + j] = (next_dp[num + j] + dp[j]) % mod
+            
+    #         dp.update(next_dp)
         
-        return dp[n] % mod
+    #     return dp[n] % mod
         
 def main():
     sol = Solution()
