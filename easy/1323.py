@@ -1,9 +1,12 @@
 class Solution:
     def maximum69Number(self, num: int) -> int:
-        if str(num).count('6') == 0:
-            return num
-        else:
-            return int(str(num).replace('6', '9', 1))
+        return int(str(num).replace('6', '9', 1))
+    
+    # def maximum69Number(self, num: int) -> int:
+    #     if str(num).count('6') == 0:
+    #         return num
+    #     else:
+    #         return int(str(num).replace('6', '9', 1))
 
 def main():
     sol = Solution()
