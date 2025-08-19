@@ -2,18 +2,30 @@ from typing import List
 
 class Solution:
     def zeroFilledSubarray(self, nums: List[int]) -> int:
-        n = len(nums)
-        count = 0
-        res = 0
+        res = count = 0
 
-        for i in range(n):
-            if not nums[i]:
+        for num in nums:
+            if num == 0:
                 count += 1
+                res += count
             else:
                 count = 0
-            res += count
 
         return res 
+
+    # def zeroFilledSubarray(self, nums: List[int]) -> int:
+    #     n = len(nums)
+    #     count = 0
+    #     res = 0
+
+    #     for i in range(n):
+    #         if not nums[i]:
+    #             count += 1
+    #         else:
+    #             count = 0
+    #         res += count
+
+    #     return res 
 
     # def zeroFilledSubarray(self, nums: List[int]) -> int:
     #     n = len(nums)
