@@ -3,16 +3,33 @@ from typing import List
 class Solution:
     def countSquares(self, matrix: List[List[int]]) -> int:
         m, n = len(matrix), len(matrix[0])
-        dp = [[0 for j in range(n + 1)] for i in range(m + 1)]
-        res = 0
+        res = prev = 0
+        dp = [0 for _ in range(n + 1)]
 
-        for i in range(m):
-            for j in range(n):
-                if matrix[i][j]:
-                    dp[i + 1][j + 1] = min(dp[i][j + 1], dp[i + 1][j], dp[i][j]) + 1
-                    res += dp[i + 1][j + 1]
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                if matrix[i - 1][j - 1] == 1:
+                    temp = dp[j]
+                    dp[j] = 1 + min(prev, dp[j - 1], dp[j])
+                    prev = temp
+                    res += dp[j]
+                else:
+                    dp[j] = 0
         
         return res
+
+    # def countSquares(self, matrix: List[List[int]]) -> int:
+    #     m, n = len(matrix), len(matrix[0])
+    #     dp = [[0 for j in range(n + 1)] for i in range(m + 1)]
+    #     res = 0
+
+    #     for i in range(m):
+    #         for j in range(n):
+    #             if matrix[i][j]:
+    #                 dp[i + 1][j + 1] = min(dp[i][j + 1], dp[i + 1][j], dp[i][j]) + 1
+    #                 res += dp[i + 1][j + 1]
+        
+    #     return res
 
     # def countSquares(self, matrix: List[List[int]]) -> int:
     #     for i in range(1, len(matrix)):
