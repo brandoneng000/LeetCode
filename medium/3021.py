@@ -1,12 +1,15 @@
 class Solution:
     def flowerGame(self, n: int, m: int) -> int:
-        n_even = n_odd = n // 2
-        n_odd += n % 2
+        return (m * n) // 2
+    
+    # def flowerGame(self, n: int, m: int) -> int:
+    #     n_even = n_odd = n // 2
+    #     n_odd += n % 2
 
-        m_even = m_odd = m // 2
-        m_odd += m % 2
+    #     m_even = m_odd = m // 2
+    #     m_odd += m % 2
 
-        return n_even * m_odd + n_odd * m_even
+    #     return n_even * m_odd + n_odd * m_even
 
 def main():
     sol = Solution()
