@@ -3,23 +3,42 @@ from typing import List
 class Solution:
     def numberOfPairs(self, points: List[List[int]]) -> int:
         n = len(points)
+        points.sort(key=lambda x: (x[0], -x[1]))
         res = 0
 
         for i in range(n):
-            for j in range(n):
+            _, top = points[i]
+            bottom = -1
 
-                if i != j and points[i][0] <= points[j][0] and points[i][1] >= points[j][1]:
-                    
-                    for k in range(n):
-                        if i == k or j == k:
-                            continue
+            for j in range(i + 1, n):
+                if bottom < points[j][1] <= top:
+                    res += 1
+                    bottom = points[j][1]
 
-                        if points[i][0] <= points[k][0] <= points[j][0] and points[i][1] >= points[k][1] >= points[j][1]:
-                            break
-                    else:
-                        res += 1
+                    if bottom == top:
+                        break
         
         return res
+
+    # def numberOfPairs(self, points: List[List[int]]) -> int:
+    #     n = len(points)
+    #     res = 0
+
+    #     for i in range(n):
+    #         for j in range(n):
+
+    #             if i != j and points[i][0] <= points[j][0] and points[i][1] >= points[j][1]:
+                    
+    #                 for k in range(n):
+    #                     if i == k or j == k:
+    #                         continue
+
+    #                     if points[i][0] <= points[k][0] <= points[j][0] and points[i][1] >= points[k][1] >= points[j][1]:
+    #                         break
+    #                 else:
+    #                     res += 1
+        
+    #     return res
         
 def main():
     sol = Solution()
