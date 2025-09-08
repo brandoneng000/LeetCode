@@ -2,9 +2,16 @@ from typing import List
 
 class Solution:
     def getNoZeroIntegers(self, n: int) -> List[int]:
-        for num in range(n):
-            if str(num).count('0') == 0 and str(n - num).count('0') == 0:
-                return [num, n - num]
+        for x in range(1, n):
+            y = n - x
+
+            if "0" not in str(y) + str(x):
+                return [x, y]
+
+    # def getNoZeroIntegers(self, n: int) -> List[int]:
+    #     for num in range(n):
+    #         if str(num).count('0') == 0 and str(n - num).count('0') == 0:
+    #             return [num, n - num]
 
 def main():
     sol = Solution()
