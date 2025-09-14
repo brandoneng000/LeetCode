@@ -30,7 +30,7 @@ class Solution:
             words_cap.setdefault(word_lower, word)
             words_vow.setdefault(remove_vowel(word_lower), word)
         
-        return map(solve, queries)
+        return list(map(solve, queries))
 
 
 def main():
