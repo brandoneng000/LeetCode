@@ -1,15 +1,23 @@
 class Solution:
     def canBeTypedWords(self, text: str, brokenLetters: str) -> int:
-        text = text.split()
-        result = len(text)
+        res = 0
 
-        for word in text:
-            for broken in brokenLetters:
-                if broken in word:
-                    result -= 1
-                    break
+        for word in text.split():
+            res += not any(letter in word for letter in brokenLetters)
         
-        return result
+        return res
+
+    # def canBeTypedWords(self, text: str, brokenLetters: str) -> int:
+    #     text = text.split()
+    #     result = len(text)
+
+    #     for word in text:
+    #         for broken in brokenLetters:
+    #             if broken in word:
+    #                 result -= 1
+    #                 break
+        
+    #     return result
 
 
 
