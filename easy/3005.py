@@ -3,15 +3,30 @@ from collections import Counter
 
 class Solution:
     def maxFrequencyElements(self, nums: List[int]) -> int:
-        nums_count = Counter(nums)
-        max_count = max(nums_count.values())
+        count = Counter(nums)
         res = 0
+        max_count = 0
 
-        for num in nums_count:
-            if nums_count[num] == max_count:
-                res += nums_count[num]
+        for num, c in count.most_common():
+            if c < max_count:
+                break
 
+            res += c
+            max_count = c
+        
         return res
+            
+
+    # def maxFrequencyElements(self, nums: List[int]) -> int:
+    #     nums_count = Counter(nums)
+    #     max_count = max(nums_count.values())
+    #     res = 0
+
+    #     for num in nums_count:
+    #         if nums_count[num] == max_count:
+    #             res += nums_count[num]
+
+    #     return res
         
 def main():
     sol = Solution()
