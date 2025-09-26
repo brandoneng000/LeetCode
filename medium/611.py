@@ -2,18 +2,35 @@ from typing import List
 
 class Solution:
     def triangleNumber(self, nums: List[int]) -> int:
-        res = 0
+        n = len(nums)
         nums.sort()
-        for i in range(0, len(nums) - 2):
-            k = i + 2 
-            for j in range(i + 1, len(nums) - 1):
-                if nums[i] == 0:
-                    break
-                while k < len(nums) and nums[i] + nums[j] > nums[k]:
-                    k += 1
-                res += k - j - 1
+        res = 0
+
+        for i in range(n - 1, -1, -1):
+            left, right = 0, i - 1
+            
+            while left < right:
+                if nums[left] + nums[right] > nums[i]:
+                    res += right - left
+                    right -= 1
+                else:
+                    left += 1
         
         return res
+        
+    # def triangleNumber(self, nums: List[int]) -> int:
+    #     res = 0
+    #     nums.sort()
+    #     for i in range(0, len(nums) - 2):
+    #         k = i + 2 
+    #         for j in range(i + 1, len(nums) - 1):
+    #             if nums[i] == 0:
+    #                 break
+    #             while k < len(nums) and nums[i] + nums[j] > nums[k]:
+    #                 k += 1
+    #             res += k - j - 1
+        
+    #     return res
     
     
     # def triangleNumber(self, nums: List[int]) -> int:
