@@ -2,22 +2,32 @@ from typing import List
 
 class Solution:
     def largestPerimeter(self, nums: List[int]) -> int:
-        largest_side = max(nums)
-        nums.remove(largest_side)
-        second = max(nums)
-        nums.remove(second)
-        third = max(nums)
-        nums.remove(third)
+        n = len(nums)
+        nums.sort(reverse=True)
 
-        while largest_side + second <= third or second + third <= largest_side or largest_side + third <= second:
-            if not nums:
-                return 0
-            largest_side = second
-            second = third
-            third = max(nums)
-            nums.remove(third)
+        for i in range(n - 2):
+            if nums[i] < nums[i + 1] + nums[i + 2]:
+                return nums[i] + nums[i + 1] + nums[i + 2]
         
-        return largest_side + second + third
+        return 0
+
+    # def largestPerimeter(self, nums: List[int]) -> int:
+    #     largest_side = max(nums)
+    #     nums.remove(largest_side)
+    #     second = max(nums)
+    #     nums.remove(second)
+    #     third = max(nums)
+    #     nums.remove(third)
+
+    #     while largest_side + second <= third or second + third <= largest_side or largest_side + third <= second:
+    #         if not nums:
+    #             return 0
+    #         largest_side = second
+    #         second = third
+    #         third = max(nums)
+    #         nums.remove(third)
+        
+    #     return largest_side + second + third
 
 
 
