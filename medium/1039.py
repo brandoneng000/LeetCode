@@ -1,6 +1,24 @@
 from typing import List
+from functools import lru_cache
 
 class Solution:
+    # def minScoreTriangulation(self, values: List[int]) -> int:
+    #     def dp(i, j):
+    #         if i + 2 > j:
+    #             return 0
+            
+    #         if (i, j) in cache:
+    #             return cache[i, j]
+            
+    #         cache[i, j] = min(
+    #             (values[i] * values[k] * values[j] + dp(i, k) + dp(k, j)) for k in range(i + 1, j)
+    #         )
+    #         return cache[i, j]
+
+    #     cache = {}
+
+    #     return dp(0, len(values) - 1)
+
     def minScoreTriangulation(self, values: List[int]) -> int:
         n = len(values)
         dp = [[0] * n for _ in range(n)]
