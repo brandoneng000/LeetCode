@@ -1,30 +1,43 @@
 from typing import List
+from bisect import bisect_left
 
 class Solution:
     def successfulPairs(self, spells: List[int], potions: List[int], success: int) -> List[int]:
-        def check_str(spell: int, potions: List[int]):
-            left, right = 0, m - 1
-
-            while left <= right:
-                middle = (left + right) // 2
-                
-                if potions[middle] * spell >= success:
-                    right = middle - 1
-                else:
-                    left = middle + 1
-            
-            return left
-
-        n = len(spells)
-        m = len(potions)
+        n = len(potions)
         potions.sort()
-        res = [0] * n
+        res = []
 
-        for i in range(n):
-            index = check_str(spells[i], potions)
-            res[i] = m - index
-
+        for spell in spells:
+            index = bisect_left(potions, (success + spell - 1) // spell)
+            res.append(n - index)
+        
         return res
+
+
+    # def successfulPairs(self, spells: List[int], potions: List[int], success: int) -> List[int]:
+    #     def check_str(spell: int, potions: List[int]):
+    #         left, right = 0, m - 1
+
+    #         while left <= right:
+    #             middle = (left + right) // 2
+                
+    #             if potions[middle] * spell >= success:
+    #                 right = middle - 1
+    #             else:
+    #                 left = middle + 1
+            
+    #         return left
+
+    #     n = len(spells)
+    #     m = len(potions)
+    #     potions.sort()
+    #     res = [0] * n
+
+    #     for i in range(n):
+    #         index = check_str(spells[i], potions)
+    #         res[i] = m - index
+
+    #     return res
         
 def main():
     sol = Solution()
