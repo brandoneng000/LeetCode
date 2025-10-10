@@ -3,12 +3,21 @@ from typing import List
 class Solution:
     def maximumEnergy(self, energy: List[int], k: int) -> int:
         n = len(energy)
-        res = [0] * k
 
-        for i in range(n):
-            res[i % k] = max(res[i % k] + energy[i], energy[i])
+        for i in range(n - k - 1, -1, -1):
+            energy[i] += energy[i + k]
         
-        return max(res)
+        return max(energy)
+
+
+    # def maximumEnergy(self, energy: List[int], k: int) -> int:
+    #     n = len(energy)
+    #     res = [0] * k
+
+    #     for i in range(n):
+    #         res[i % k] = max(res[i % k] + energy[i], energy[i])
+        
+    #     return max(res)
         
 
 def main():
