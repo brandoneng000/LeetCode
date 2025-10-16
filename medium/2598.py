@@ -3,14 +3,29 @@ from collections import Counter
 
 class Solution:
     def findSmallestInteger(self, nums: List[int], value: int) -> int:
-        count = Counter([num % value for num in nums])
+        remainder = [0] * value
         res = 0
 
-        while count[res % value]:
-            count[res % value] -= 1
+        for num in nums:
+            r = num % value
+            remainder[r] += 1
+
+        while remainder[res % value]:
+            remainder[res % value] -= 1
             res += 1
         
         return res
+
+
+    # def findSmallestInteger(self, nums: List[int], value: int) -> int:
+    #     count = Counter([num % value for num in nums])
+    #     res = 0
+
+    #     while count[res % value]:
+    #         count[res % value] -= 1
+    #         res += 1
+        
+    #     return res
 
 def main():
     sol = Solution()
