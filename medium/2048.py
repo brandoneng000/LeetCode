@@ -1,7 +1,15 @@
 from itertools import permutations
 from bisect import bisect_right
+from collections import Counter
 
 class Solution:
+    # def nextBeautifulNumber(self, n: int) -> int:
+    #     for i in range(n + 1, 1224445):
+    #         count = Counter(str(i))
+
+    #         if all(count[d] == int(d) for d in count):
+    #             return i
+
     def nextBeautifulNumber(self, n: int) -> int:
         nums = [1, 22, 122, 333, 1333, 4444, 44441, 55555, 22333, 122333, 155555, 224444, 666666]
         nums = [str(num) for num in nums]
