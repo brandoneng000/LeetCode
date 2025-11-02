@@ -3,44 +3,66 @@ from typing import List
 class Solution:
     def countUnguarded(self, m: int, n: int, guards: List[List[int]], walls: List[List[int]]) -> int:
         grid = [[0 for j in range(n)] for i in range(m)]
-        res = m * n - len(walls) - len(guards)
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+
+        for r, c in guards:
+            grid[r][c] = 2
 
         for r, c in walls:
-            grid[r][c] = 1
+            grid[r][c] = 2
+
+        for row, col in guards:
+            for dr, dc in directions:
+                r = row
+                c = col
+
+                while 0 <= r + dr < m and 0 <= c + dc < n and grid[r + dr][c + dc] != 2:
+                    r += dr
+                    c += dc
+                    grid[r][c] = 1
         
-        for row, col in guards:
-            grid[row][col] = 2
+        return sum(row.count(0) for row in grid)
 
-        for row, col in guards:
-            for c in range(col - 1, -1, -1):
-                if grid[row][c] == 0:
-                    res -= 1
-                elif grid[row][c] == 1 or grid[row][c] == 2:
-                    break
-                grid[row][c] = 3
-            
-            for c in range(col + 1, n):
-                if grid[row][c] == 0:
-                    res -= 1
-                elif grid[row][c] == 1 or grid[row][c] == 2:
-                    break
-                grid[row][c] = 3
-            
-            for r in range(row - 1, -1, -1):
-                if grid[r][col] == 0:
-                    res -= 1
-                elif grid[r][col] == 1 or grid[r][col] == 2:
-                    break
-                grid[r][col] = 3
-            
-            for r in range(row + 1, m):
-                if grid[r][col] == 0:
-                    res -= 1
-                elif grid[r][col] == 1 or grid[r][col] == 2:
-                    break
-                grid[r][col] = 3
+    # def countUnguarded(self, m: int, n: int, guards: List[List[int]], walls: List[List[int]]) -> int:
+    #     grid = [[0 for j in range(n)] for i in range(m)]
+    #     res = m * n - len(walls) - len(guards)
 
-        return res
+    #     for r, c in walls:
+    #         grid[r][c] = 1
+        
+    #     for row, col in guards:
+    #         grid[row][col] = 2
+
+    #     for row, col in guards:
+    #         for c in range(col - 1, -1, -1):
+    #             if grid[row][c] == 0:
+    #                 res -= 1
+    #             elif grid[row][c] == 1 or grid[row][c] == 2:
+    #                 break
+    #             grid[row][c] = 3
+            
+    #         for c in range(col + 1, n):
+    #             if grid[row][c] == 0:
+    #                 res -= 1
+    #             elif grid[row][c] == 1 or grid[row][c] == 2:
+    #                 break
+    #             grid[row][c] = 3
+            
+    #         for r in range(row - 1, -1, -1):
+    #             if grid[r][col] == 0:
+    #                 res -= 1
+    #             elif grid[r][col] == 1 or grid[r][col] == 2:
+    #                 break
+    #             grid[r][col] = 3
+            
+    #         for r in range(row + 1, m):
+    #             if grid[r][col] == 0:
+    #                 res -= 1
+    #             elif grid[r][col] == 1 or grid[r][col] == 2:
+    #                 break
+    #             grid[r][col] = 3
+
+    #     return res
             
 
 def main():
