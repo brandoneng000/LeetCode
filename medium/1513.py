@@ -1,4 +1,19 @@
 class Solution:
+    # def numSub(self, s: str) -> int:
+    #     n = len(s)
+    #     mod = 1000000007
+    #     res = 0
+    #     count = 0
+
+    #     for i in range(n):
+    #         if s[i] == '1':
+    #             count += 1
+    #             res = (res + count) % mod
+    #         else:
+    #             count = 0
+        
+    #     return res % mod
+
     def numSub(self, s: str) -> int:
         mod = 1000000007
         res = 0
