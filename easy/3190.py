@@ -2,17 +2,20 @@ from typing import List
 
 class Solution:
     def minimumOperations(self, nums: List[int]) -> int:
-        res = 0
+        return sum(min(3 - num % 3, num % 3) for num in nums)
 
-        for num in nums:
-            num %= 3
+    # def minimumOperations(self, nums: List[int]) -> int:
+    #     res = 0
 
-            if num == 0:
-                continue
+    #     for num in nums:
+    #         num %= 3
 
-            res += min(3 - num, num)
+    #         if num == 0:
+    #             continue
+
+    #         res += min(3 - num, num)
         
-        return res
+    #     return res
         
 def main():
     sol = Solution()
