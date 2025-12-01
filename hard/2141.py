@@ -3,21 +3,31 @@ import heapq
 
 class Solution:
     def maxRunTime(self, n: int, batteries: List[int]) -> int:
-        left, right = 1, sum(batteries) // n
+        batteries.sort()
+        total = sum(batteries)
 
-        while left < right:
-            target = right - (right - left) // 2
+        while batteries[-1] > total // n:
+            n -= 1
+            total -= batteries.pop()
+        
+        return total // n
 
-            extra = 0
-            for power in batteries:
-                extra += min(power, target)
+    # def maxRunTime(self, n: int, batteries: List[int]) -> int:
+    #     left, right = 1, sum(batteries) // n
 
-            if extra // n >= target:
-                left = target
-            else:
-                right = target - 1
+    #     while left < right:
+    #         target = right - (right - left) // 2
+
+    #         extra = 0
+    #         for power in batteries:
+    #             extra += min(power, target)
+
+    #         if extra // n >= target:
+    #             left = target
+    #         else:
+    #             right = target - 1
             
-        return left
+    #     return left
 
     # def maxRunTime(self, n: int, batteries: List[int]) -> int:
     #     batteries.sort()
