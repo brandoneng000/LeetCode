@@ -1,20 +1,24 @@
 class Solution:
     def countCollisions(self, directions: str) -> int:
-        n = len(directions)
-        left, right = 0, n - 1
+        directions = directions.lstrip('L').rstrip('R')
+        return len(directions) - directions.count('S')
 
-        while left < n and directions[left] == 'L':
-            left += 1
-        
-        while right > -1 and directions[right] == 'R':
-            right -= 1
-        
-        res = 0
-        for i in range(left, right + 1):
-            if directions[i] != 'S':
-                res += 1
+    # def countCollisions(self, directions: str) -> int:
+    #     n = len(directions)
+    #     left, right = 0, n - 1
 
-        return res
+    #     while left < n and directions[left] == 'L':
+    #         left += 1
+        
+    #     while right > -1 and directions[right] == 'R':
+    #         right -= 1
+        
+    #     res = 0
+    #     for i in range(left, right + 1):
+    #         if directions[i] != 'S':
+    #             res += 1
+
+    #     return res
 
         
 def main():
