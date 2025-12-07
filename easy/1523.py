@@ -1,8 +1,11 @@
 class Solution:
     def countOdds(self, low: int, high: int) -> int:
-        result = high % 2 == 1 or low % 2 == 1
-        result += (high - low) // 2
-        return result
+        return (high + 1) // 2 - (low // 2)
+
+    # def countOdds(self, low: int, high: int) -> int:
+    #     result = high % 2 == 1 or low % 2 == 1
+    #     result += (high - low) // 2
+    #     return result
 
 def main():
     sol = Solution()
