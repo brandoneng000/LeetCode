@@ -2,13 +2,26 @@ from typing import List
 
 class Solution:
     def maximumHappinessSum(self, happiness: List[int], k: int) -> int:
+        happiness.sort(reverse=True)
         res = 0
-        h = sorted(happiness)
 
         for i in range(k):
-            res += max(0, h.pop() - i)
+            if happiness[i] >= i:
+                res += happiness[i] - i
+            else:
+                break
         
         return res
+
+
+    # def maximumHappinessSum(self, happiness: List[int], k: int) -> int:
+    #     res = 0
+    #     h = sorted(happiness)
+
+    #     for i in range(k):
+    #         res += max(0, h.pop() - i)
+        
+    #     return res
 
 def main():
     sol = Solution()
