@@ -2,15 +2,27 @@ from typing import List
 
 class Solution:
     def repeatedNTimes(self, nums: List[int]) -> int:
-        # from collections import Counter
-        # size = len(nums)
-        # n = size // 2
-        # nums_count = Counter(nums)
+        used = set()
 
-        # for num in nums_count:
-        #     if nums_count[num] == n:
-        #         return num
-        return (sum(nums) - sum(set(nums))) // (len(nums) // 2 - 1)
+        for num in nums:
+            if num in used:
+                return num
+            used.add(num)
+        
+        return -1
+
+    # def repeatedNTimes(self, nums: List[int]) -> int:
+    #     from collections import Counter
+    #     size = len(nums)
+    #     n = size // 2
+    #     nums_count = Counter(nums)
+
+    #     for num in nums_count:
+    #         if nums_count[num] == n:
+    #             return num
+
+    # def repeatedNTimes(self, nums: List[int]) -> int:
+    #     return (sum(nums) - sum(set(nums))) // (len(nums) // 2 - 1)
 
 
 def main():
