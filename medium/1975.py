@@ -2,18 +2,37 @@ from typing import List
 
 class Solution:
     def maxMatrixSum(self, matrix: List[List[int]]) -> int:
-        m, n = len(matrix), len(matrix[0])
-        negatives = 0
-        lowest = float('inf')
         res = 0
+        lowest = 1_000_000
+        negatives = 0
 
-        for i in range(m):
-            for j in range(n):
-                negatives += matrix[i][j] < 0
-                res += abs(matrix[i][j])
-                lowest = min(lowest, abs(matrix[i][j]))
+        for row in matrix:
+            for num in row:
+                res += abs(num)
+
+                if num < 0:
+                    negatives += 1
+                lowest = min(lowest, abs(num))
         
-        return res - (lowest * 2 if negatives & 1 else 0)
+        if negatives % 2:
+            res -= lowest * 2
+        
+        return res
+        
+
+    # def maxMatrixSum(self, matrix: List[List[int]]) -> int:
+    #     m, n = len(matrix), len(matrix[0])
+    #     negatives = 0
+    #     lowest = float('inf')
+    #     res = 0
+
+    #     for i in range(m):
+    #         for j in range(n):
+    #             negatives += matrix[i][j] < 0
+    #             res += abs(matrix[i][j])
+    #             lowest = min(lowest, abs(matrix[i][j]))
+        
+    #     return res - (lowest * 2 if negatives & 1 else 0)
                 
                 
         
