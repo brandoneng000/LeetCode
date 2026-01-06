@@ -8,26 +8,48 @@ class TreeNode:
         self.right = right
 class Solution:
     def maxLevelSum(self, root: Optional[TreeNode]) -> int:
-        q = collections.deque([root])
-        children = 1
-        level = 1
-        total = 0
-        res = (root.val, 1)
+        def dfs(node: TreeNode, level: int):
+            if not node:
+                return
+            
+            levels[level] = levels.get(level, 0) + node.val
+            dfs(node.left, level + 1)
+            dfs(node.right, level + 1)
 
-        while q:
-            node = q.popleft()
-            if node.left:
-                q.append(node.left)
-            if node.right:
-                q.append(node.right)
-            children -= 1
-            total += node.val
+        levels = {}
+        dfs(root, 1)
+        res = 1
+        max_sum = levels[1]
 
-            if children == 0:
-                if res[0] < total:
-                    res = (total, level)
-                total = 0
-                level += 1
-                children = len(q)
+        for l in levels:
+            if levels[l] > max_sum:
+                res = l
+                max_sum = levels[l]
         
-        return res[1]
+        return res
+
+
+    # def maxLevelSum(self, root: Optional[TreeNode]) -> int:
+    #     q = collections.deque([root])
+    #     children = 1
+    #     level = 1
+    #     total = 0
+    #     res = (root.val, 1)
+
+    #     while q:
+    #         node = q.popleft()
+    #         if node.left:
+    #             q.append(node.left)
+    #         if node.right:
+    #             q.append(node.right)
+    #         children -= 1
+    #         total += node.val
+
+    #         if children == 0:
+    #             if res[0] < total:
+    #                 res = (total, level)
+    #             total = 0
+    #             level += 1
+    #             children = len(q)
+        
+    #     return res[1]
