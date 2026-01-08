@@ -3,16 +3,38 @@ from typing import List
 class Solution:
     def maxDotProduct(self, nums1: List[int], nums2: List[int]) -> int:
         size1, size2 = len(nums1), len(nums2)
-        dp = [[-float('inf') for _ in range(size2 + 1)] for _ in range(size1 + 1)]
-        
-        for i in range(size1 + 1):
-            for j in range(size2 + 1):
-                if i == 0 or j == 0:
-                    continue
-                dot = nums1[i - 1] * nums2[j - 1]
-                dp[i][j] = max(dot, dp[i - 1][j - 1] + dot, dp[i - 1][j], dp[i][j - 1])
+        cache = [-float('inf')] * size2
+        cache[0] = nums1[0] * nums2[0]
 
-        return dp[size1][size2]
+        for i in range(size1):
+            for j in range(size2):
+                old = cache[j]
+
+                if i == 0 and j == 0:
+                    continue
+                elif i == 0:
+                    cache[j] = max(cache[j - 1], nums1[i] * nums2[j])
+                elif j == 0:
+                    cache[j] = max(cache[j], nums1[i] * nums2[j])
+                else:
+                    cache[j] = max(cache[j], cache[j - 1], nums1[i] * nums2[j], temp + nums1[i] * nums2[j])
+                
+                temp = old
+        
+        return cache[-1]
+
+    # def maxDotProduct(self, nums1: List[int], nums2: List[int]) -> int:
+    #     size1, size2 = len(nums1), len(nums2)
+    #     dp = [[-float('inf') for _ in range(size2 + 1)] for _ in range(size1 + 1)]
+        
+    #     for i in range(size1 + 1):
+    #         for j in range(size2 + 1):
+    #             if i == 0 or j == 0:
+    #                 continue
+    #             dot = nums1[i - 1] * nums2[j - 1]
+    #             dp[i][j] = max(dot, dp[i - 1][j - 1] + dot, dp[i - 1][j], dp[i][j - 1])
+
+    #     return dp[size1][size2]
 
         
 
