@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -5,6 +7,25 @@ class TreeNode:
         self.left = left
         self.right = right
 class Solution:
+    # def subtreeWithAllDeepest(self, root: TreeNode) -> TreeNode:
+    #     def dfs(node: TreeNode):
+    #         if not node:
+    #             return res(None, 0)
+            
+    #         left = dfs(node.left)
+    #         right = dfs(node.right)
+
+    #         if left.dist > right.dist:
+    #             return res(left.node, left.dist + 1)
+    #         if left.dist < right.dist:
+    #             return res(right.node, right.dist + 1)
+            
+    #         return res(node, left.dist + 1)
+        
+    #     res = namedtuple("Result", ("node", "dist"))
+    #     return dfs(root).node
+        
+
     def subtreeWithAllDeepest(self, root: TreeNode) -> TreeNode:
         self.res = root
         self.max_depth = 0
