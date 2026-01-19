@@ -11,7 +11,7 @@ class Solution:
         
         def check_threshold(k: int):
             for i, j in itertools.product(range(m + 1 - k), range(n + 1 - k)):
-                if prefix[i + k][j + k] - prefix[i][j + k] - prefix[i - k][j] + prefix[i][j] <= threshold:
+                if prefix[i + k][j + k] - prefix[i][j + k] - prefix[i + k][j] + prefix[i][j] <= threshold:
                     return True
             return False
         
