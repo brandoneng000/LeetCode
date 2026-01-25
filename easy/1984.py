@@ -1,18 +1,33 @@
 from typing import List
-import heapq
 
 class Solution:
     def minimumDifference(self, nums: List[int], k: int) -> int:
-        if k == 1:
-            return 0
-
         nums.sort()
-        res = float('inf')
+        return min(nums[i + k - 1] - nums[i] for i in range(len(nums) - k + 1))
 
-        for i in range(len(nums) - k + 1):
-            res = min(res, nums[i + k - 1] - nums[i])
+    # def minimumDifference(self, nums: List[int], k: int) -> int:
+    #     if k == 1:
+    #         return 0
+
+    #     nums.sort()
+    #     res = 1000000
+
+    #     for i in range(len(nums) - k + 1):
+    #         res = min(res, nums[i + k - 1] - nums[i])
         
-        return res
+    #     return res
+
+    # def minimumDifference(self, nums: List[int], k: int) -> int:
+    #     if k == 1:
+    #         return 0
+
+    #     nums.sort()
+    #     res = float('inf')
+
+    #     for i in range(len(nums) - k + 1):
+    #         res = min(res, nums[i + k - 1] - nums[i])
+        
+    #     return res
 
 def main():
     sol = Solution()
