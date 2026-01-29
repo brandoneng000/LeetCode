@@ -3,7 +3,8 @@ from collections import defaultdict
 
 class Solution:
     def minimumCost(self, source: str, target: str, original: List[str], changed: List[str], cost: List[int]) -> int:
-        dist = [[float('inf') for j in range(26)] for i in range(26)]
+        INF = 10000000 
+        dist = [[INF for j in range(26)] for i in range(26)]
         res = 0
 
         for x, y, z in zip(original, changed, cost):
@@ -14,7 +15,18 @@ class Solution:
         for k in range(26):
             for i in range(26):
                 for j in range(26):
-                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
+                    if dist[i][k] == INF or dist[k][j] == INF:
+                        continue
+
+                    distance = dist[i][k] + dist[k][j]
+
+                    if distance < dist[i][j]:
+                        dist[i][j] = distance
+
+        # for k in range(26):
+        #     for i in range(26):
+        #         for j in range(26):
+        #             dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
 
         for cur, goal in zip(source, target):
             if cur == goal:
@@ -22,7 +34,7 @@ class Solution:
             start = ord(cur) - ord('a')
             end = ord(goal) - ord('a')
 
-            if dist[start][end] == float('inf'):
+            if dist[start][end] == INF:
                 return -1
             res += dist[start][end]
 
