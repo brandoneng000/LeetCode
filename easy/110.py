@@ -7,15 +7,39 @@ class TreeNode:
         self.right = right
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        if not root:
-            return True
-
-        def dfs(root: TreeNode, height):
+        def dfs(root: TreeNode):
             if not root:
-                return height
+                return 0
             
-            return max(dfs(root.left, height + 1), dfs(root.right, height + 1))
+            left = dfs(root.left)
 
-        left = dfs(root.left, 1)
-        right = dfs(root.right, 1)
-        return abs(left - right) <= 1 and self.isBalanced(root.left) and self.isBalanced(root.right)
+            if left == -1:
+                return -1
+            
+            right = dfs(root.right)
+            
+            if right == -1:
+                return -1
+            
+            if abs(left - right) > 1:
+                return -1
+
+            return 1 + max(left, right)
+        
+        return dfs(root) != -1
+        
+        
+
+    # def isBalanced(self, root: Optional[TreeNode]) -> bool:
+    #     if not root:
+    #         return True
+
+    #     def dfs(root: TreeNode, height):
+    #         if not root:
+    #             return height
+            
+    #         return max(dfs(root.left, height + 1), dfs(root.right, height + 1))
+
+    #     left = dfs(root.left, 1)
+    #     right = dfs(root.right, 1)
+    #     return abs(left - right) <= 1 and self.isBalanced(root.left) and self.isBalanced(root.right)
