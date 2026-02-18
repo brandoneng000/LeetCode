@@ -1,26 +1,32 @@
 class Solution:
     def hasAlternatingBits(self, n: int) -> bool:
-        # odd = n % 2 == 1
+        x = n ^ (n >> 1)
+        return (x & (x + 1)) == 0
 
-        # while n:
-        #     n >>= 1
-        #     if odd:
-        #         odd = n % 2 == 1
-        #         if odd:
-        #             return False
-        #     else:
-        #         odd = n % 2 == 1
-        #         if not odd:
-        #             return False
+    # def hasAlternatingBits(self, n: int) -> bool:
+    #     odd = n % 2 == 1
 
-        # return True 
-        n, current = divmod(n, 2)
-        while n:
-            if current == n % 2:
-                return False
-            n, current = divmod(n, 2)
+    #     while n:
+    #         n >>= 1
+    #         if odd:
+    #             odd = n % 2 == 1
+    #             if odd:
+    #                 return False
+    #         else:
+    #             odd = n % 2 == 1
+    #             if not odd:
+    #                 return False
+
+    #     return True 
+    
+    # def hasAlternatingBits(self, n: int) -> bool:
+    #     n, current = divmod(n, 2)
+    #     while n:
+    #         if current == n % 2:
+    #             return False
+    #         n, current = divmod(n, 2)
         
-        return True
+    #     return True
 
 def main():
     sol = Solution()
