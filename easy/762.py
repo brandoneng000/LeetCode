@@ -1,13 +1,17 @@
 class Solution:
     def countPrimeSetBits(self, left: int, right: int) -> int:
-        def is_prime(num: int) -> bool:
-            for factor in range(2, int(num ** 0.5) + 1):
-                if num % factor == 0:
-                    return False
+        primes = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31 }
+        return sum(num.bit_count() in primes for num in range(left, right + 1))
+
+    # def countPrimeSetBits(self, left: int, right: int) -> int:
+    #     def is_prime(num: int) -> bool:
+    #         for factor in range(2, int(num ** 0.5) + 1):
+    #             if num % factor == 0:
+    #                 return False
     
-            return num != 1
+    #         return num != 1
         
-        return sum(is_prime(bin(num).count('1')) for num in range(left, right + 1))
+    #     return sum(is_prime(bin(num).count('1')) for num in range(left, right + 1))
 
 def main():
     sol = Solution()
