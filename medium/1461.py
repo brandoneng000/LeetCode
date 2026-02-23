@@ -1,11 +1,29 @@
 class Solution:
     def hasAllCodes(self, s: str, k: int) -> bool:
-        binary = set()
+        req = 1 << k
+        seen = [False] * req
+        mask = req - 1
+        h = 0
 
-        for i in range(len(s) - k + 1):
-            binary.add(s[i:i + k])
+        for i, bit in enumerate(s):
+            h = ((h << 1) & mask) | int(bit)
+
+            if i >= k - 1 and not seen[h]:
+                seen[h] = True
+                req -= 1
+
+                if req == 0:
+                    return True
         
-        return len(binary) == 2 ** k
+        return False
+
+    # def hasAllCodes(self, s: str, k: int) -> bool:
+    #     binary = set()
+
+    #     for i in range(len(s) - k + 1):
+    #         binary.add(s[i:i + k])
+        
+    #     return len(binary) == 2 ** k
         
 
 def main():
