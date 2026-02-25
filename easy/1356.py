@@ -2,9 +2,12 @@ from typing import List
 
 class Solution:
     def sortByBits(self, arr: List[int]) -> List[int]:
-        arr.sort()
-        arr.sort(key=lambda x: bin(x).count('1'))
-        return arr
+        return sorted(sorted(arr), key=lambda x: x.bit_count())
+
+    # def sortByBits(self, arr: List[int]) -> List[int]:
+    #     arr.sort()
+    #     arr.sort(key=lambda x: bin(x).count('1'))
+    #     return arr
 
 def main():
     sol = Solution()
