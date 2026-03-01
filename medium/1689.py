@@ -1,6 +1,11 @@
 class Solution:
     def minPartitions(self, n: str) -> int:
-        return int(max(n))
+        for num in "987654321":
+            if num in n:
+                return int(num)
+
+    # def minPartitions(self, n: str) -> int:
+    #     return int(max(n))
         
 def main():
     sol = Solution()
