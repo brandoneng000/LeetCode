@@ -1,11 +1,14 @@
 class Solution:
     def bitwiseComplement(self, n: int) -> int:
-        mask = 1
+        return n ^ ((1 << n.bit_length()) - 1) if n != 0 else 1
 
-        while n > mask:
-            mask = mask * 2 + 1
-        
-        return mask ^ n
+    # def bitwiseComplement(self, n: int) -> int:
+    #     mask = 1
+
+    #     while n > mask:
+    #         mask = mask * 2 + 1
+
+    #     return mask ^ n
 
 def main():
     sol = Solution()
