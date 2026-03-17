@@ -5,16 +5,34 @@ class Solution:
         m, n = len(matrix), len(matrix[0])
         res = 0
 
-        for i in range(m):
-            for j in range(n):
-                if matrix[i][j] != 0 and i > 0:
-                    matrix[i][j] += matrix[i - 1][j]
-            
-            cur_row = sorted(matrix[i], reverse=True)
-            for j in range(n):
-                res = max(res, cur_row[j] * (j + 1))
+        for r in range(1, m):
+            for c in range(n):
+                if matrix[r][c] == 1:
+                    matrix[r][c] += matrix[r - 1][c]
+        
+        for r in range(m):
+            row_heights = sorted(matrix[r], reverse=True)
+            for c in range(n):
+                area = (c + 1) * row_heights[c]
+                res = max(res, area)
         
         return res
+
+
+    # def largestSubmatrix(self, matrix: List[List[int]]) -> int:
+    #     m, n = len(matrix), len(matrix[0])
+    #     res = 0
+
+    #     for i in range(m):
+    #         for j in range(n):
+    #             if matrix[i][j] != 0 and i > 0:
+    #                 matrix[i][j] += matrix[i - 1][j]
+            
+    #         cur_row = sorted(matrix[i], reverse=True)
+    #         for j in range(n):
+    #             res = max(res, cur_row[j] * (j + 1))
+        
+    #     return res
 
         
 def main():
