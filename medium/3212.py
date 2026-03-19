@@ -2,20 +2,40 @@ from typing import List
 
 class Solution:
     def numberOfSubmatrices(self, grid: List[List[str]]) -> int:
-        m, n = len(grid), len(grid[0])
-        x = [[0 for j in range(n + 1)] for i in range(m + 1)]
-        y = [[0 for j in range(n + 1)] for i in range(m + 1)]
+        n = len(grid[0])
         res = 0
+        x = [0] * n
+        y = [0] * n
 
-        for i in range(m):
-            for j in range(n):
-                x[i][j] = x[i - 1][j] + x[i][j - 1] - x[i - 1][j - 1] + (grid[i][j] == 'X')
-                y[i][j] = y[i - 1][j] + y[i][j - 1] - y[i - 1][j - 1] + (grid[i][j] == 'Y')
+        for row in grid:
+            row_x = row_y = 0
 
-                if x[i][j] == y[i][j] and x[i][j] > 0:
-                    res += 1
-        
+            for i in range(n):
+                row_x += row[i] == 'X'
+                row_y += row[i] == 'Y'
+
+                x[i] += row_x
+                y[i] += row_y
+
+                res += (x[i] > 0 and x[i] == y[i])
+            
         return res
+
+    # def numberOfSubmatrices(self, grid: List[List[str]]) -> int:
+    #     m, n = len(grid), len(grid[0])
+    #     x = [[0 for j in range(n + 1)] for i in range(m + 1)]
+    #     y = [[0 for j in range(n + 1)] for i in range(m + 1)]
+    #     res = 0
+
+    #     for i in range(m):
+    #         for j in range(n):
+    #             x[i][j] = x[i - 1][j] + x[i][j - 1] - x[i - 1][j - 1] + (grid[i][j] == 'X')
+    #             y[i][j] = y[i - 1][j] + y[i][j - 1] - y[i - 1][j - 1] + (grid[i][j] == 'Y')
+
+    #             if x[i][j] == y[i][j] and x[i][j] > 0:
+    #                 res += 1
+        
+    #     return res
         
         
 def main():
