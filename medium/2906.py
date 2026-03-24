@@ -3,25 +3,44 @@ from typing import List
 class Solution:
     def constructProductMatrix(self, grid: List[List[int]]) -> List[List[int]]:
         mod = 12345
-        m, n = len(grid), len(grid[0])
+        n, m = len(grid), len(grid[0])
+        res = [[0] * m for _ in range(n)]
+        suffix = 1
 
-        prefix = [1]
-        suffix = [1]
-
-        for i in range(m):
-            for j in range(n):
-                prefix.append((prefix[-1] * grid[i][j]) % mod)
-
-        for i in range(m - 1, -1, -1):
-            for j in range(n - 1 , -1, -1):
-                suffix.append((suffix[-1] * grid[i][j]) % mod)
-
-        for i in range(m):
-            for j in range(n):
-                k = i * n + j
-                grid[i][j] = (prefix[k] * suffix[-k - 2]) % mod
+        for i in range(n - 1, -1, -1):
+            for j in range(m - 1, -1, -1):
+                res[i][j] = suffix
+                suffix = (suffix * grid[i][j]) % mod
         
-        return grid
+        prefix = 1
+        for i in range(n):
+            for j in range(m):
+                res[i][j] = (res[i][j] * prefix) % mod
+                prefix = (prefix * grid[i][j]) % mod
+        
+        return res
+
+    # def constructProductMatrix(self, grid: List[List[int]]) -> List[List[int]]:
+    #     mod = 12345
+    #     m, n = len(grid), len(grid[0])
+
+    #     prefix = [1]
+    #     suffix = [1]
+
+    #     for i in range(m):
+    #         for j in range(n):
+    #             prefix.append((prefix[-1] * grid[i][j]) % mod)
+
+    #     for i in range(m - 1, -1, -1):
+    #         for j in range(n - 1 , -1, -1):
+    #             suffix.append((suffix[-1] * grid[i][j]) % mod)
+
+    #     for i in range(m):
+    #         for j in range(n):
+    #             k = i * n + j
+    #             grid[i][j] = (prefix[k] * suffix[-k - 2]) % mod
+        
+    #     return grid
     
     # def constructProductMatrix(self, grid: List[List[int]]) -> List[List[int]]:
     #     mod = 12345
