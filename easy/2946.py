@@ -2,18 +2,29 @@ from typing import List
 
 class Solution:
     def areSimilar(self, mat: List[List[int]], k: int) -> bool:
-        def check_row(nums: List[int], k: int, shift: int):
-            temp = nums[k * shift:] + nums[:k * shift]
-            return temp == nums
+        n, m = len(mat), len(mat[0])
+        k %= m
 
-        m, n = len(mat), len(mat[0])
-        k %= n
-
-        for i in range(m):
-            if not check_row(mat[i], k, -1 if i % 2 else 1):
-                return False
+        for i in range(n):
+            for j in range(m):
+                if mat[i][j] != mat[i][(j + k) % m]:
+                    return False
         
         return True
+
+    # def areSimilar(self, mat: List[List[int]], k: int) -> bool:
+    #     def check_row(nums: List[int], k: int, shift: int):
+    #         temp = nums[k * shift:] + nums[:k * shift]
+    #         return temp == nums
+
+    #     m, n = len(mat), len(mat[0])
+    #     k %= n
+
+    #     for i in range(m):
+    #         if not check_row(mat[i], k, -1 if i % 2 else 1):
+    #             return False
+        
+    #     return True
 
         
 def main():
