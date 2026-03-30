@@ -2,13 +2,19 @@ from collections import Counter
 
 class Solution:
     def checkStrings(self, s1: str, s2: str) -> bool:
-        n = len(s1)
-        evens1 = Counter(s1[i] for i in range(0, n, 2))
-        evens2 = Counter(s2[i] for i in range(0, n, 2))
-        odds1 = Counter(s1[i] for i in range(1, n, 2))
-        odds2 = Counter(s2[i] for i in range(1, n, 2))
+        return (
+            Counter(s1[i] for i in range(0, len(s1), 2)) == Counter(s2[i] for i in range(0, len(s2), 2)) 
+            and Counter(s1[i] for i in range(1, len(s1), 2)) == Counter(s2[i] for i in range(1, len(s2), 2))
+        )
 
-        return evens1 == evens2 and odds1 == odds2
+    # def checkStrings(self, s1: str, s2: str) -> bool:
+    #     n = len(s1)
+    #     evens1 = Counter(s1[i] for i in range(0, n, 2))
+    #     evens2 = Counter(s2[i] for i in range(0, n, 2))
+    #     odds1 = Counter(s1[i] for i in range(1, n, 2))
+    #     odds2 = Counter(s2[i] for i in range(1, n, 2))
+
+    #     return evens1 == evens2 and odds1 == odds2
 
 
         
