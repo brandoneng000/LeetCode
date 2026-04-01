@@ -3,38 +3,71 @@ from collections import deque
 
 class Solution:
     def survivedRobotsHealths(self, positions: List[int], healths: List[int], directions: str) -> List[int]:
-        line = sorted([p, r, h, d] for r, [p, h, d] in enumerate(zip(positions, healths, directions), 1))
+        n = len(positions)
+        indexes = list(range(n))
+        res = []
         stack = deque()
-        res = {}
 
-        for p, r, h, d in line:
-            if not stack:
-                stack.append([p, r, h, d])
+        indexes.sort(key=lambda x: positions[x])
+
+        for index in indexes:
+            if directions[index] == "R":
+                stack.append(index)
             else:
-                if stack[-1][3] == d:
-                    stack.append([p, r, h, d])
-                else:
-                    while stack and h:
-                        if stack[-1][2] > h:
-                            stack[-1][2] -= 1
-                            h = 0
-                        elif stack[-1][2] < h:
-                            stack.pop()
-                            h -= 1
-                        else:
-                            stack.pop()
-                            h = 0
-                    if h:
-                        stack.append([p, r, h, d])
-            
-            while stack and stack[0][3] == 'L':
-                res[stack[0][1]] = stack[0][2]
-                stack.popleft()
-            
-        for p, r, h, d in stack:
-            res[r] = h
+                while stack and healths[index] > 0:
+                    top_index = stack.pop()
 
-        return [res[r] for r in sorted(res)]
+                    if healths[top_index] > healths[index]:
+                        healths[top_index] -= 1
+                        healths[index] = 0
+                        stack.append(top_index)
+                    elif healths[top_index] < healths[index]:
+                        healths[index] -= 1
+                        healths[top_index] = 0
+                    else:
+                        healths[index] = 0
+                        healths[top_index] = 0
+        
+        for index in range(n):
+            if healths[index] > 0:
+                res.append(healths[index])
+        
+        return res
+
+
+    # def survivedRobotsHealths(self, positions: List[int], healths: List[int], directions: str) -> List[int]:
+    #     line = sorted([p, r, h, d] for r, [p, h, d] in enumerate(zip(positions, healths, directions), 1))
+    #     stack = deque()
+    #     res = {}
+
+    #     for p, r, h, d in line:
+    #         if not stack:
+    #             stack.append([p, r, h, d])
+    #         else:
+    #             if stack[-1][3] == d:
+    #                 stack.append([p, r, h, d])
+    #             else:
+    #                 while stack and h:
+    #                     if stack[-1][2] > h:
+    #                         stack[-1][2] -= 1
+    #                         h = 0
+    #                     elif stack[-1][2] < h:
+    #                         stack.pop()
+    #                         h -= 1
+    #                     else:
+    #                         stack.pop()
+    #                         h = 0
+    #                 if h:
+    #                     stack.append([p, r, h, d])
+            
+    #         while stack and stack[0][3] == 'L':
+    #             res[stack[0][1]] = stack[0][2]
+    #             stack.popleft()
+            
+    #     for p, r, h, d in stack:
+    #         res[r] = h
+
+    #     return [res[r] for r in sorted(res)]
         
 def main():
     sol = Solution()
