@@ -1,25 +1,44 @@
 class Solution:
     def decodeCiphertext(self, encodedText: str, rows: int) -> str:
-        if not encodedText:
-            return ""
-
+        if rows == 1:
+            return encodedText
+        
         n = len(encodedText)
+        cols = n // rows
+        i = j = k = 0
         res = []
-        col = n // rows
 
-        for i in range(col):
-            r = 0
-            c = i
+        while k < n:
+            res.append(encodedText[k])
+            i += 1
+            if i == rows:
+                i = 0
+                j += 1
+            k = i * (cols + 1) + j
 
-            while r < rows and c < col:
-                res.append(encodedText[r * col + c])
-                r += 1
-                c += 1
+        return ''.join(res).rstrip()
+
+    # def decodeCiphertext(self, encodedText: str, rows: int) -> str:
+    #     if not encodedText:
+    #         return ""
+
+    #     n = len(encodedText)
+    #     res = []
+    #     col = n // rows
+
+    #     for i in range(col):
+    #         r = 0
+    #         c = i
+
+    #         while r < rows and c < col:
+    #             res.append(encodedText[r * col + c])
+    #             r += 1
+    #             c += 1
         
-        while res[-1] == ' ':
-            res.pop()
+    #     while res[-1] == ' ':
+    #         res.pop()
         
-        return "".join(res)
+    #     return "".join(res)
 
         
 def main():
