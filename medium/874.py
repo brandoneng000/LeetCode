@@ -5,26 +5,59 @@ class Solution:
         direction = [(0, 1), (1, 0), (0, -1), (-1, 0)]
         res = 0
         d = 0
-        pos = [0, 0]
+
         blocks = set()
         for x, y in obstacles:
             blocks.add((x, y))
         
+        x = 0
+        y = 0
+
         for c in commands:
             if c == -1:
-                d = (d + 1) % len(direction)
+                d = (d + 1) % 4
             elif c == -2:
-                d = (d - 1) % len(direction)
+                d = (d - 1) % 4
             else:
+                dx, dy = direction[d]
                 for _ in range(c):
-                    if (pos[0] + direction[d][0], pos[1] + direction[d][1]) not in blocks:
-                        pos[0] += direction[d][0]
-                        pos[1] += direction[d][1]
-                    else:
+                    new_x = x + dx
+                    new_y = y + dy
+
+                    if (new_x, new_y) in blocks:
                         break
-                res = max(res, (pos[0] * pos[0] + pos[1] * pos[1]))
+                    
+                    x = new_x
+                    y = new_y
+
+                    res = max(res, x * x + y * y)
         
         return res
+    
+    # def robotSim(self, commands: List[int], obstacles: List[List[int]]) -> int:
+    #     direction = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+    #     res = 0
+    #     d = 0
+    #     pos = [0, 0]
+    #     blocks = set()
+    #     for x, y in obstacles:
+    #         blocks.add((x, y))
+        
+    #     for c in commands:
+    #         if c == -1:
+    #             d = (d + 1) % len(direction)
+    #         elif c == -2:
+    #             d = (d - 1) % len(direction)
+    #         else:
+    #             for _ in range(c):
+    #                 if (pos[0] + direction[d][0], pos[1] + direction[d][1]) not in blocks:
+    #                     pos[0] += direction[d][0]
+    #                     pos[1] += direction[d][1]
+    #                 else:
+    #                     break
+    #             res = max(res, (pos[0] * pos[0] + pos[1] * pos[1]))
+        
+    #     return res
 
 
 
