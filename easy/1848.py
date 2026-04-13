@@ -2,13 +2,16 @@ from typing import List
 
 class Solution:
     def getMinDistance(self, nums: List[int], target: int, start: int) -> int:
-        result = float('inf')
+        return min(abs(i - start) for i, num in enumerate(nums) if num == target)
 
-        for index, val in enumerate(nums):
-            if target == val:
-                result = min(result, abs(index - start))
+    # def getMinDistance(self, nums: List[int], target: int, start: int) -> int:
+    #     result = float('inf')
+
+    #     for index, val in enumerate(nums):
+    #         if target == val:
+    #             result = min(result, abs(index - start))
         
-        return result
+    #     return result
 
 def main():
     sol = Solution()
