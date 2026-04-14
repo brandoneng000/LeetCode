@@ -2,37 +2,63 @@ from typing import List
 
 class Solution:
     def minimumTotalDistance(self, robot: List[int], factory: List[List[int]]) -> int:
-        def helper(robot_index: int, factory_index: int):
-            if dp[robot_index][factory_index] is not None:
-                return dp[robot_index][factory_index]
-            
-            if robot_index == n:
-                dp[robot_index][factory_index] = 0
-                return 0
-            
-            if factory_index == m:
-                dp[robot_index][factory_index] = 10 ** 12
-                return 10 ** 12
-            
-            assign = abs(robot[robot_index] - factory_pos[factory_index]) + helper(robot_index + 1, factory_index + 1)
-            
-            skip = helper(robot_index, factory_index + 1)
-
-            dp[robot_index][factory_index] = min(assign, skip)
-
-            return dp[robot_index][factory_index]
-
+        INF = 10 ** 33
         robot.sort()
         factory.sort(key=lambda x: x[0])
         factory_pos = []
 
         for f in factory:
-            factory_pos.extend([f[0]] * f[1])
-        
-        n, m = len(robot), len(factory_pos)
-        dp = [[None for j in range(m + 1)] for i in range(n + 1)]
+            for _ in range(f[1]):
+                factory_pos.append(f[0])
 
-        return helper(0, 0)
+        robot_count, factory_count = len(robot), len(factory_pos)
+        dp = [[0] * (factory_count + 1) for _ in range(robot_count + 1)]
+
+        for i in range(robot_count):
+            dp[i][factory_count] = INF
+
+        for i in range(robot_count - 1, -1, -1):
+            for j in range(factory_count - 1, -1, -1):
+                assign = abs(robot[i] - factory_pos[j]) + dp[i + 1][j + 1]
+
+                skip = dp[i][j + 1]
+
+                dp[i][j] = min(assign, skip)
+        
+        return dp[0][0]
+
+    # def minimumTotalDistance(self, robot: List[int], factory: List[List[int]]) -> int:
+    #     def helper(robot_index: int, factory_index: int):
+    #         if dp[robot_index][factory_index] is not None:
+    #             return dp[robot_index][factory_index]
+            
+    #         if robot_index == n:
+    #             dp[robot_index][factory_index] = 0
+    #             return 0
+            
+    #         if factory_index == m:
+    #             dp[robot_index][factory_index] = 10 ** 12
+    #             return 10 ** 12
+            
+    #         assign = abs(robot[robot_index] - factory_pos[factory_index]) + helper(robot_index + 1, factory_index + 1)
+            
+    #         skip = helper(robot_index, factory_index + 1)
+
+    #         dp[robot_index][factory_index] = min(assign, skip)
+
+    #         return dp[robot_index][factory_index]
+
+    #     robot.sort()
+    #     factory.sort(key=lambda x: x[0])
+    #     factory_pos = []
+
+    #     for f in factory:
+    #         factory_pos.extend([f[0]] * f[1])
+        
+    #     n, m = len(robot), len(factory_pos)
+    #     dp = [[None for j in range(m + 1)] for i in range(n + 1)]
+
+    #     return helper(0, 0)
 
         
 def main():
