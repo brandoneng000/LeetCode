@@ -3,26 +3,37 @@ import collections
 
 class Solution:
     def maxDistance(self, colors: List[int]) -> int:
-        # min_colors = collections.defaultdict(lambda: 1000)
-        # max_colors = collections.defaultdict(int)
-        # max_distance = 0
+        n = len(colors)
 
-        # for index, val in enumerate(colors):
-        #     min_colors[val] = min(min_colors[val], index)
-        #     max_colors[val] = max(max_colors[val], index)
+        for i in range(n):
+            if colors[0] != colors[n - i - 1] or colors[n - 1] != colors[i]:
+                return n - i - 1
+        
+        return -1
+
+    # def maxDistance(self, colors: List[int]) -> int:
+    #     min_colors = collections.defaultdict(lambda: 1000)
+    #     max_colors = collections.defaultdict(int)
+    #     max_distance = 0
+
+    #     for index, val in enumerate(colors):
+    #         min_colors[val] = min(min_colors[val], index)
+    #         max_colors[val] = max(max_colors[val], index)
        
-        # for color in colors:
-        #     for dif in colors:
-        #         if color != dif:
-        #             max_distance = max(max_distance, abs(max_colors[color] - min_colors[dif]))
+    #     for color in colors:
+    #         for dif in colors:
+    #             if color != dif:
+    #                 max_distance = max(max_distance, abs(max_colors[color] - min_colors[dif]))
 
-        # return max_distance
-        left, right = 0, len(colors) - 1
-        while colors[0] == colors[right]:
-            right -= 1
-        while colors[-1] == colors[left]:
-            left += 1
-        return max(len(colors) - 1 - left, right)
+    #     return max_distance
+
+    # def maxDistance(self, colors: List[int]) -> int:
+    #     left, right = 0, len(colors) - 1
+    #     while colors[0] == colors[right]:
+    #         right -= 1
+    #     while colors[-1] == colors[left]:
+    #         left += 1
+    #     return max(len(colors) - 1 - left, right)
 
 def main():
     sol = Solution()
