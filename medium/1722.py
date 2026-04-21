@@ -1,40 +1,76 @@
 from typing import List
 from collections import defaultdict, Counter
 
-class UnionFind:
-    def __init__(self, n: int) -> None:
-        self.root = list(range(n))
-    
-    def union(self, x, y):
-        self.root[self.find(x)] = self.find(y)
-    
-    def find(self, x):
-        if x != self.root[x]:
-            self.root[x] = self.find(self.root[x])
-        
-        return self.root[x]
-
 class Solution:
     def minimumHammingDistance(self, source: List[int], target: List[int], allowedSwaps: List[List[int]]) -> int:
+        def find(x):
+            if parent[x] != x:
+                parent[x] = find(parent[x])
+            return parent[x]
+
+        def union(a, b):
+            parent[find(a)] = find(b)
+
         n = len(source)
-        uf = UnionFind(n)
-
-        for i, j in allowedSwaps:
-            uf.union(i, j)
-        
-        m = defaultdict(set)
-
-        for i in range(n):
-            m[uf.find(i)].add(i)
-        
+        parent = list(range(n))
         res = 0
 
-        for indexes in m.values():
-            count_source = Counter(source[j] for j in indexes)
-            count_target = Counter(target[j] for j in indexes)
-            res += sum((count_source - count_target).values())
+        for a, b in allowedSwaps:
+            union(a, b)
+        
+        groups = defaultdict(list)
+
+        for i in range(n):
+            groups[find(i)].append(source[i])
+        
+        groups = { root: Counter(vals) for root, vals in groups.items() }
+
+        for i in range(n):
+            root = find(i)
+            freq = groups[root]
+
+            if freq[target[i]] > 0:
+                freq[target[i]] -= 1
+            else:
+                res += 1
         
         return res
+
+
+# class UnionFind:
+#     def __init__(self, n: int) -> None:
+#         self.root = list(range(n))
+    
+#     def union(self, x, y):
+#         self.root[self.find(x)] = self.find(y)
+    
+#     def find(self, x):
+#         if x != self.root[x]:
+#             self.root[x] = self.find(self.root[x])
+        
+#         return self.root[x]
+
+# class Solution:
+#     def minimumHammingDistance(self, source: List[int], target: List[int], allowedSwaps: List[List[int]]) -> int:
+#         n = len(source)
+#         uf = UnionFind(n)
+
+#         for i, j in allowedSwaps:
+#             uf.union(i, j)
+        
+#         m = defaultdict(set)
+
+#         for i in range(n):
+#             m[uf.find(i)].add(i)
+        
+#         res = 0
+
+#         for indexes in m.values():
+#             count_source = Counter(source[j] for j in indexes)
+#             count_target = Counter(target[j] for j in indexes)
+#             res += sum((count_source - count_target).values())
+        
+#         return res
 
 
     # def minimumHammingDistance(self, source: List[int], target: List[int], allowedSwaps: List[List[int]]) -> int:
