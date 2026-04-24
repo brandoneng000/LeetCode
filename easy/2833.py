@@ -1,6 +1,19 @@
 class Solution:
     def furthestDistanceFromOrigin(self, moves: str) -> int:
-        return abs(moves.count('L') - moves.count('R')) + moves.count('_')
+        res = left = right = 0
+
+        for m in moves:
+            if m == 'L':
+                left += 1
+            elif m == 'R':
+                right += 1
+            else:
+                res += 1
+        
+        return abs(left - right) + res
+
+    # def furthestDistanceFromOrigin(self, moves: str) -> int:
+    #     return abs(moves.count('L') - moves.count('R')) + moves.count('_')
 
     # def furthestDistanceFromOrigin(self, moves: str) -> int:
     #     blank = left = right = 0
