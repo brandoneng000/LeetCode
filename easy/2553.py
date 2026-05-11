@@ -3,38 +3,44 @@ import collections
 
 class Solution:
     def separateDigits(self, nums: List[int]) -> List[int]:
-        nums = "".join(str(n) for n in nums)
-        return [int(d) for d in nums]
-        
-        # res = []
+        return [int(d) for num in nums for d in str(num)]
 
-        # for n in nums:
-        #     temp = collections.deque()
-        #     while n:
-        #         temp.appendleft(n % 10)
-        #         n //= 10
-        #     res.extend(temp)
+    # def separateDigits(self, nums: List[int]) -> List[int]:
+    #     nums = "".join(str(n) for n in nums)
+    #     return [int(d) for d in nums]
         
-        # return res
+    # def separateDigits(self, nums: List[int]) -> List[int]:
+    #     res = []
+
+    #     for n in nums:
+    #         temp = collections.deque()
+    #         while n:
+    #             temp.appendleft(n % 10)
+    #             n //= 10
+    #         res.extend(temp)
+        
+    #     return res
     
-        # res = []
+    # def separateDigits(self, nums: List[int]) -> List[int]:
+    #     res = []
 
-        # for n in nums:
-        #     temp = []
-        #     while n:
-        #         temp.append(n % 10)
-        #         n //= 10
-        #     res.extend(temp[::-1])
+    #     for n in nums:
+    #         temp = []
+    #         while n:
+    #             temp.append(n % 10)
+    #             n //= 10
+    #         res.extend(temp[::-1])
         
-        # return res
+    #     return res
         
-        # res = []
+    # def separateDigits(self, nums: List[int]) -> List[int]:
+    #     res = []
 
-        # for n in nums:
-        #     temp = list(str(n))
-        #     res.extend(int(d) for d in temp)
+    #     for n in nums:
+    #         temp = list(str(n))
+    #         res.extend(int(d) for d in temp)
         
-        # return res
+    #     return res
 
 def main():
     sol = Solution()
