@@ -2,19 +2,33 @@ from typing import List
 
 class Solution:
     def isGood(self, nums: List[int]) -> bool:
-        n = len(set(nums))
-        
-        if len(nums) != n + 1:
+        nums.sort()
+        n = len(nums) - 1
+        largest = nums[-1]
+
+        if n != largest or nums[-1] != nums[-2]:
             return False
         
-        for i, num in zip(range(1, n + 1), sorted(set(nums))):
-            if i != num:
+        for i in range(n):
+            if nums[i] != i + 1:
                 return False
         
-        if nums.count(n) != 2:
-            return False
-
         return True
+
+    # def isGood(self, nums: List[int]) -> bool:
+    #     n = len(set(nums))
+        
+    #     if len(nums) != n + 1:
+    #         return False
+        
+    #     for i, num in zip(range(1, n + 1), sorted(set(nums))):
+    #         if i != num:
+    #             return False
+        
+    #     if nums.count(n) != 2:
+    #         return False
+
+    #     return True
 
         
 def main():
