@@ -2,24 +2,38 @@ from typing import List
 
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        if len(nums) == 1:
-            return nums[0]
-        left, right = 0, len(nums) - 1
+        left = 0
+        right = len(nums) - 1
 
         while left < right:
             middle = (left + right) // 2
 
-            if nums[right] < nums[left]:
-                if nums[left] < nums[middle]:
-                    left = middle
-                elif nums[left] > nums[middle]:
-                    right = middle
-                if right - left == 1:
-                    return min(nums[left], nums[right])
+            if nums[middle] > nums[right]:
+                left = middle + 1
             else:
-                return nums[left]
+                right = middle
         
-        return nums[middle]
+        return nums[left]
+
+    # def findMin(self, nums: List[int]) -> int:
+    #     if len(nums) == 1:
+    #         return nums[0]
+    #     left, right = 0, len(nums) - 1
+
+    #     while left < right:
+    #         middle = (left + right) // 2
+
+    #         if nums[right] < nums[left]:
+    #             if nums[left] < nums[middle]:
+    #                 left = middle
+    #             elif nums[left] > nums[middle]:
+    #                 right = middle
+    #             if right - left == 1:
+    #                 return min(nums[left], nums[right])
+    #         else:
+    #             return nums[left]
+        
+    #     return nums[middle]
         
 def main():
     sol = Solution()
