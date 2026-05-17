@@ -3,28 +3,42 @@ import collections
 
 class Solution:
     def canReach(self, arr: List[int], start: int) -> bool:
-        n = len(arr)
-        visited = set([start])
-        q = collections.deque([start])
-
-        while q:
-            index = q.popleft()
-
-            if arr[index] == 0:
+        def dfs(i: int):
+            if not (0 <= i < len(arr)) or arr[i] == -1:
+                return False
+            if arr[i] == 0:
                 return True
-
-            forward = index + arr[index]
-            backward = index - arr[index]
             
-            if forward not in visited and 0 <= forward < n:
-                visited.add(forward)
-                q.append(forward)
-            
-            if backward not in visited and 0 <= backward < n:
-                visited.add(backward)
-                q.append(backward)
+            temp = arr[i]
+            arr[i] = -1
 
-        return False
+            return dfs(i + temp) or dfs(i - temp)
+
+        return dfs(start)
+
+    # def canReach(self, arr: List[int], start: int) -> bool:
+    #     n = len(arr)
+    #     visited = set([start])
+    #     q = collections.deque([start])
+
+    #     while q:
+    #         index = q.popleft()
+
+    #         if arr[index] == 0:
+    #             return True
+
+    #         forward = index + arr[index]
+    #         backward = index - arr[index]
+            
+    #         if forward not in visited and 0 <= forward < n:
+    #             visited.add(forward)
+    #             q.append(forward)
+            
+    #         if backward not in visited and 0 <= backward < n:
+    #             visited.add(backward)
+    #             q.append(backward)
+
+    #     return False
             
 
 
