@@ -3,16 +3,38 @@ from collections import Counter
 
 class Solution:
     def findThePrefixCommonArray(self, A: List[int], B: List[int]) -> List[int]:
-        set_a = set()
-        set_b = set()
+        n = len(A)
+        seen_a = set()
+        seen_b = set()
         res = []
+        cnt = 0
 
-        for a, b in zip(A, B):
-            set_a.add(a)
-            set_b.add(b)
-            res.append(len(set_a.intersection(set_b)))
+        for i in range(n):
+            if A[i] in seen_b and A[i] not in seen_a:
+                cnt += 1
+            else:
+                seen_a.add(A[i])
+            
+            if B[i] in seen_a and B[i] not in seen_b:
+                cnt += 1
+            else:
+                seen_b.add(B[i])
+            
+            res.append(cnt)
         
         return res
+
+    # def findThePrefixCommonArray(self, A: List[int], B: List[int]) -> List[int]:
+    #     set_a = set()
+    #     set_b = set()
+    #     res = []
+
+    #     for a, b in zip(A, B):
+    #         set_a.add(a)
+    #         set_b.add(b)
+    #         res.append(len(set_a.intersection(set_b)))
+        
+    #     return res
         
 
     # def findThePrefixCommonArray(self, A: List[int], B: List[int]) -> List[int]:
