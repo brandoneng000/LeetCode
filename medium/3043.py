@@ -2,19 +2,37 @@ from typing import List
 
 class Solution:
     def longestCommonPrefix(self, arr1: List[int], arr2: List[int]) -> int:
-        def count_prefix(arr: List[str]):
-            res = set()
+        arr1_prefix = set()
+        res = 0
 
-            for num in arr:
-                for i in range(len(num) + 1):
-                    res.add(num[:i])
+        for num in arr1:
+            while num not in arr1_prefix and num > 0:
+                arr1_prefix.add(num)
+                num //= 10
         
-            return res
-        
-        set_arr1 = count_prefix([str(num) for num in arr1])
-        set_arr2 = count_prefix([str(num) for num in arr2])
+        for num in arr2:
+            while num not in arr1_prefix and num > 0:
+                num //= 10
+            
+            if num > 0:
+                res = max(res, len(str(num)))
+            
+        return res
 
-        return len(max(set_arr1 & set_arr2, key=len))
+    # def longestCommonPrefix(self, arr1: List[int], arr2: List[int]) -> int:
+    #     def count_prefix(arr: List[str]):
+    #         res = set()
+
+    #         for num in arr:
+    #             for i in range(len(num) + 1):
+    #                 res.add(num[:i])
+        
+    #         return res
+        
+    #     set_arr1 = count_prefix([str(num) for num in arr1])
+    #     set_arr2 = count_prefix([str(num) for num in arr2])
+
+    #     return len(max(set_arr1 & set_arr2, key=len))
 
         
 def main():
