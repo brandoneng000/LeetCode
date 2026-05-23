@@ -2,18 +2,28 @@ from typing import List
 
 class Solution:
     def check(self, nums: List[int]) -> bool:
-        initial = 0
+        n = len(nums)
+        res = 0
 
-        for index in range(len(nums) - 1):
-            if nums[index] > nums[index + 1]:
-                initial = index + 1
-                break
+        for i in range(n):
+            if nums[i] > nums[(i + 1) % n]:
+                res += 1
+        
+        return res <= 1
 
-        size = len(nums)
-        nums += nums
+    # def check(self, nums: List[int]) -> bool:
+    #     initial = 0
 
-        nums = nums[initial: initial + size]
-        return sorted(nums) == nums
+    #     for index in range(len(nums) - 1):
+    #         if nums[index] > nums[index + 1]:
+    #             initial = index + 1
+    #             break
+
+    #     size = len(nums)
+    #     nums += nums
+
+    #     nums = nums[initial: initial + size]
+    #     return sorted(nums) == nums
 
 
 def main():
