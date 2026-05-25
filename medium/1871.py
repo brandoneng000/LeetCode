@@ -1,18 +1,38 @@
 class Solution:
     def canReach(self, s: str, minJump: int, maxJump: int) -> bool:
         n = len(s)
-        dp = [c == '0' for c in s]
+        
+        dp = [False] * n
+        dp[0] = True
 
-        pre = 0
+        reach = 0
 
         for i in range(1, n):
-            if i >= minJump:
-                pre += dp[i - minJump]
-            if i > maxJump:
-                pre -= dp[i - maxJump - 1]
-            dp[i] &= pre > 0
+            if i >= minJump and dp[i - minJump]:
+                reach += 1
+
+            if i + 1 >= maxJump and dp[i - maxJump - 1]:
+                reach -= 1
+            
+            dp[i] = (reach > 0 and s[i] == '0')
         
         return dp[-1]
+
+
+    # def canReach(self, s: str, minJump: int, maxJump: int) -> bool:
+    #     n = len(s)
+    #     dp = [c == '0' for c in s]
+
+    #     pre = 0
+
+    #     for i in range(1, n):
+    #         if i >= minJump:
+    #             pre += dp[i - minJump]
+    #         if i > maxJump:
+    #             pre -= dp[i - maxJump - 1]
+    #         dp[i] &= pre > 0
+        
+    #     return dp[-1]
 
         
 def main():
