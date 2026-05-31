@@ -2,14 +2,30 @@ from typing import List
 
 class Solution:
     def asteroidsDestroyed(self, mass: int, asteroids: List[int]) -> bool:
-        asteroids.sort()
+        def helper(index: int, mass: int):
+            if index == len(asteroids):
+                return True
 
-        for a in asteroids:
-            if mass < a:
+            if mass < asteroids[index]:
                 return False
-            mass += a
+            
+            if mass >= asteroids[-1]:
+                return True
+            
+            return helper(index + 1, mass + asteroids[index])
+
+        asteroids.sort()
+        return helper(0, mass)
+
+    # def asteroidsDestroyed(self, mass: int, asteroids: List[int]) -> bool:
+    #     asteroids.sort()
+
+    #     for a in asteroids:
+    #         if mass < a:
+    #             return False
+    #         mass += a
         
-        return True
+    #     return True
 
         
 def main():
