@@ -2,14 +2,28 @@ from typing import List
 
 class Solution:
     def minimumCost(self, cost: List[int]) -> int:
-        result = 0
-        cost.sort(reverse=True)
+        count = 0
+        res = 0
 
-        for index in range(0, len(cost), 3):
-            result += cost[index]
-            result += cost[index + 1] if index + 1 < len(cost) else 0
+        for candy in sorted(cost, reverse=True):
+            if count == 2:
+                count = 0
+            else:
+                count += 1
+                res += candy
         
-        return result
+        return res
+
+
+    # def minimumCost(self, cost: List[int]) -> int:
+    #     result = 0
+    #     cost.sort(reverse=True)
+
+    #     for index in range(0, len(cost), 3):
+    #         result += cost[index]
+    #         result += cost[index + 1] if index + 1 < len(cost) else 0
+        
+    #     return result
 
 def main():
     sol = Solution()
