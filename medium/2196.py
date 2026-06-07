@@ -8,22 +8,45 @@ class TreeNode:
         self.right = right
 class Solution:
     def createBinaryTree(self, descriptions: List[List[int]]) -> Optional[TreeNode]:
-        parents = set()
         children = set()
         tree = {}
 
-        for parent, child, left, in descriptions:
+        for parent, child, left in descriptions:
+            children.add(child)
+
             if parent not in tree:
                 tree[parent] = TreeNode(parent)
             if child not in tree:
                 tree[child] = TreeNode(child)
-            
-            parents.add(parent)
-            children.add(child)
 
             if left:
                 tree[parent].left = tree[child]
             else:
                 tree[parent].right = tree[child]
+        
+        for parent, child, left in descriptions:
+            if parent not in children:
+                return tree[parent]
+        
+        return None
 
-        return tree[(parents - children).pop()]
+    # def createBinaryTree(self, descriptions: List[List[int]]) -> Optional[TreeNode]:
+    #     parents = set()
+    #     children = set()
+    #     tree = {}
+
+    #     for parent, child, left, in descriptions:
+    #         if parent not in tree:
+    #             tree[parent] = TreeNode(parent)
+    #         if child not in tree:
+    #             tree[child] = TreeNode(child)
+            
+    #         parents.add(parent)
+    #         children.add(child)
+
+    #         if left:
+    #             tree[parent].left = tree[child]
+    #         else:
+    #             tree[parent].right = tree[child]
+
+    #     return tree[(parents - children).pop()]
