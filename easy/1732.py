@@ -1,15 +1,19 @@
 from typing import List
+from itertools import accumulate
 
 class Solution:
     def largestAltitude(self, gain: List[int]) -> int:
-        altitude = 0
-        max_altitude = 0
+        return max(list(accumulate(gain)) + [0])
 
-        for trip in gain:
-            altitude += trip
-            max_altitude = max(max_altitude, altitude)
+    # def largestAltitude(self, gain: List[int]) -> int:
+    #     altitude = 0
+    #     max_altitude = 0
 
-        return max_altitude
+    #     for trip in gain:
+    #         altitude += trip
+    #         max_altitude = max(max_altitude, altitude)
+
+    #     return max_altitude
         
 
 def main():
