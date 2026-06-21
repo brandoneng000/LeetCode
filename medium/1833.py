@@ -2,34 +2,46 @@ from typing import List
 
 class Solution:
     def maxIceCream(self, costs: List[int], coins: int) -> int:
-        def counting_sort(nums: List[int]):
-            count = [0] * (max(nums) + 1)
-            res = [None] * len(nums)
+        n = len(costs)
+        costs.sort()
 
-            for n in nums:
-                count[n] += 1
-
-            for i in range(1, len(count)):
-                count[i] += count[i - 1]
+        for i, cost in enumerate(costs, 1):
+            if cost > coins:
+                return i - 1
             
-            for i in range(len(nums) - 1, -1, -1):
-                res[count[nums[i]] - 1] = nums[i]
-                count[nums[i]] -= 1
-            
-            return res
-        
-        sorted_costs = counting_sort(costs)
-        
-        if sorted_costs[0] > coins:
-            return 0
-        
-        for i in range(1, len(sorted_costs)):
-            sorted_costs[i] += sorted_costs[i - 1]
+            coins -= cost
 
-            if sorted_costs[i] > coins:
-                return i
+        return n
+
+    # def maxIceCream(self, costs: List[int], coins: int) -> int:
+    #     def counting_sort(nums: List[int]):
+    #         count = [0] * (max(nums) + 1)
+    #         res = [None] * len(nums)
+
+    #         for n in nums:
+    #             count[n] += 1
+
+    #         for i in range(1, len(count)):
+    #             count[i] += count[i - 1]
+            
+    #         for i in range(len(nums) - 1, -1, -1):
+    #             res[count[nums[i]] - 1] = nums[i]
+    #             count[nums[i]] -= 1
+            
+    #         return res
         
-        return len(sorted_costs)
+    #     sorted_costs = counting_sort(costs)
+        
+    #     if sorted_costs[0] > coins:
+    #         return 0
+        
+    #     for i in range(1, len(sorted_costs)):
+    #         sorted_costs[i] += sorted_costs[i - 1]
+
+    #         if sorted_costs[i] > coins:
+    #             return i
+        
+    #     return len(sorted_costs)
 
 
 def main():
