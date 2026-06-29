@@ -2,7 +2,16 @@ from typing import List
 
 class Solution:
     def numOfStrings(self, patterns: List[str], word: str) -> int:
-        return sum(pattern in word for pattern in patterns)
+        res = 0
+
+        for p in patterns:
+            if p in word:
+                res += 1
+        
+        return res
+
+    # def numOfStrings(self, patterns: List[str], word: str) -> int:
+    #     return sum(pattern in word for pattern in patterns)
 
 def main():
     sol = Solution()
