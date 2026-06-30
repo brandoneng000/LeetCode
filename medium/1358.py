@@ -3,14 +3,31 @@ import collections
 class Solution:
     def numberOfSubstrings(self, s: str) -> int:
         n = len(s)
-        prev_index = [-1] * 3
+        a = b = c = -1
         res = 0
 
         for i in range(n):
-            prev_index[ord(s[i]) - ord('a')] = i
-            res += 1 + min(prev_index)
+            if s[i] == 'a':
+                a = i
+            elif s[i] == 'b':
+                b = i
+            else:
+                c = i
+
+            res += min(a, b, c) + 1
         
         return res
+
+    # def numberOfSubstrings(self, s: str) -> int:
+    #     n = len(s)
+    #     prev_index = [-1] * 3
+    #     res = 0
+
+    #     for i in range(n):
+    #         prev_index[ord(s[i]) - ord('a')] = i
+    #         res += 1 + min(prev_index)
+        
+    #     return res
 
 
     # def numberOfSubstrings(self, s: str) -> int:
