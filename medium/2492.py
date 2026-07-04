@@ -2,6 +2,31 @@ from typing import List
 from collections import defaultdict, deque
 
 class Solution:
+    # def minScore(self, n: int, roads: List[List[int]]) -> int:
+    #     def dfs(node: int):
+    #         res = INF
+
+    #         for nei, dist in graph[node]:
+    #             if (node, nei) in visited:
+    #                 continue
+                
+    #             visited.add((node, nei))
+    #             visited.add((nei, node))
+    #             res = min(res, dist, dfs(nei))
+
+    #         return res
+
+    #     graph = defaultdict(list)
+    #     INF = 10 ** 33
+    #     self.res = INF
+    #     visited = set()
+
+    #     for a, b, dist in roads:
+    #         graph[a].append((b, dist))
+    #         graph[b].append((a, dist))
+
+    #     return dfs(1)
+
     def minScore(self, n: int, roads: List[List[int]]) -> int:
         graph = defaultdict(dict)
         q = deque([1])
