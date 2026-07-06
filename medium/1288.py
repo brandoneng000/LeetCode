@@ -2,14 +2,25 @@ from typing import List
 
 class Solution:
     def removeCoveredIntervals(self, intervals: List[List[int]]) -> int:
-        res, right = 0, 0
+        res = right = 0
         intervals.sort(key=lambda x: (x[0], -x[1]))
         
         for i, j in intervals:
-            res += j > right
-            right = max(right, j)
+            if j > right:
+                res += 1
+                right = j
 
         return res
+    
+    # def removeCoveredIntervals(self, intervals: List[List[int]]) -> int:
+    #     res, right = 0, 0
+    #     intervals.sort(key=lambda x: (x[0], -x[1]))
+        
+    #     for i, j in intervals:
+    #         res += j > right
+    #         right = max(right, j)
+
+    #     return res
 
     # def removeCoveredIntervals(self, intervals: List[List[int]]) -> int:
     #     intervals.sort(key=lambda x: (x[0], -x[1]))
