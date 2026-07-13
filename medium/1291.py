@@ -1,19 +1,30 @@
 from typing import List
 
 class Solution:
-    def sequentialDigits(self, low: int, high: int) -> List[int]:
-        res = []
-        digits = "123456789"
+    q = [*range(1, 10)]
 
-        for size in range(len(str(low)), len(str(high)) + 1):
-            for i in range(len(digits) - size + 1):
-                num = int(digits[i:i + size])
-                if low <= num <= high:
-                    res.append(num)
-                elif num > high:
-                    break
+    for x in q:
+        d = x % 10
+
+        if d < 9:
+            q.append(x * 10 + d + 1)
+
+    def sequentialDigits(self, low: int, high: int) -> List[int]:
+        return [x for x in self.q if low <= x <= high]
+
+    # def sequentialDigits(self, low: int, high: int) -> List[int]:
+    #     res = []
+    #     digits = "123456789"
+
+    #     for size in range(len(str(low)), len(str(high)) + 1):
+    #         for i in range(len(digits) - size + 1):
+    #             num = int(digits[i:i + size])
+    #             if low <= num <= high:
+    #                 res.append(num)
+    #             elif num > high:
+    #                 break
         
-        return res
+    #     return res
                 
 
 def main():
