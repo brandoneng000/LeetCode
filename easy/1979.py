@@ -1,14 +1,18 @@
 from typing import List
+from math import gcd
 
 class Solution:
     def findGCD(self, nums: List[int]) -> int:
-        small = min(nums)
-        large = max(nums)
+        return gcd(max(nums), min(nums))
 
-        while small:
-            small, large = large % small, small
+    # def findGCD(self, nums: List[int]) -> int:
+    #     small = min(nums)
+    #     large = max(nums)
+
+    #     while small:
+    #         small, large = large % small, small
         
-        return large
+    #     return large
 
     # def findGCD(self, nums: List[int]) -> int:
     #     small = min(nums)
