@@ -3,38 +3,67 @@ from collections import defaultdict, deque
 
 class Solution:
     def remainingMethods(self, n: int, k: int, invocations: List[List[int]]) -> List[int]:
-        def bfs(graph: defaultdict, root: int):
-            q = deque([root])
-            visited = set([root])
+        adj = [[] for _ in range(n)]
 
-            while q:
-                node = q.popleft()
+        for u, v in invocations:
+            adj[u].append(v)
 
-                for nei in graph[node]:
-                    if nei not in visited:
-                        visited.add(nei)
-                        q.append(nei)
+        q = deque([k])
+        sus = [False] * n
+        sus[k] = True
+        visited = set([k])
+
+        while q:
+            node = q.popleft()
+
+            for nei in adj[node]:
+                if nei not in visited:
+                    q.append(nei)
+                    visited.add(nei)
+                    sus[nei] = True
+
+        for i in range(n):
+            if not sus[i]:
+                for nei in adj[i]:
+                    if sus[nei]:
+                        return list(range(n))
+
+        return [i for i in range(n) if not sus[i]]
+
+
+    # def remainingMethods(self, n: int, k: int, invocations: List[List[int]]) -> List[int]:
+    #     def bfs(graph: defaultdict, root: int):
+    #         q = deque([root])
+    #         visited = set([root])
+
+    #         while q:
+    #             node = q.popleft()
+
+    #             for nei in graph[node]:
+    #                 if nei not in visited:
+    #                     visited.add(nei)
+    #                     q.append(nei)
             
-            return visited
+    #         return visited
 
-        graph = defaultdict(list)
+    #     graph = defaultdict(list)
 
-        for x, y in invocations:
-            graph[x].append(y)
+    #     for x, y in invocations:
+    #         graph[x].append(y)
 
-        suspicious = bfs(graph, k)
-        res = []
+    #     suspicious = bfs(graph, k)
+    #     res = []
 
-        for node in range(n):
-            if node in suspicious:
-                continue
+    #     for node in range(n):
+    #         if node in suspicious:
+    #             continue
 
-            for nei in graph[node]:
-                if nei in suspicious:
-                    return list(range(n))
-            res.append(node)
+    #         for nei in graph[node]:
+    #             if nei in suspicious:
+    #                 return list(range(n))
+    #         res.append(node)
         
-        return res
+    #     return res
 
         
 def main():
