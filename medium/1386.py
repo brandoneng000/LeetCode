@@ -1,24 +1,47 @@
 from typing import List
-import collections
+from collections import defaultdict
 
 class Solution:
     def maxNumberOfFamilies(self, n: int, reservedSeats: List[List[int]]) -> int:
         res = 2 * n
-        occupied = collections.defaultdict(set)
+        occupied = defaultdict(set)
         valid = [{2, 3, 4, 5}, {6, 7, 8, 9}, {4, 5, 6, 7}]
 
         for row, seat in reservedSeats:
-            for i, v in enumerate(valid):
-                if seat in v:
-                    occupied[row].add(i)
-        
-        for row in occupied:
-            if len(occupied[row]) == 3:
+            if seat in valid[0]:
+                occupied[row].add(0)
+
+            if seat in valid[1]:
+                occupied[row].add(1)
+
+            if seat in valid[2]:
+                occupied[row].add(2)
+
+        for i in occupied:
+            if len(occupied[i]) == 3:
                 res -= 2
             else:
                 res -= 1
 
         return res
+
+    # def maxNumberOfFamilies(self, n: int, reservedSeats: List[List[int]]) -> int:
+    #     res = 2 * n
+    #     occupied = collections.defaultdict(set)
+    #     valid = [{2, 3, 4, 5}, {6, 7, 8, 9}, {4, 5, 6, 7}]
+
+    #     for row, seat in reservedSeats:
+    #         for i, v in enumerate(valid):
+    #             if seat in v:
+    #                 occupied[row].add(i)
+        
+    #     for row in occupied:
+    #         if len(occupied[row]) == 3:
+    #             res -= 2
+    #         else:
+    #             res -= 1
+
+    #     return res
 
     # def maxNumberOfFamilies(self, n: int, reservedSeats: List[List[int]]) -> int:
     #     res = 0
