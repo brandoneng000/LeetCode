@@ -1,24 +1,54 @@
 from typing import List
+from collections import deque
 
 class Solution:
     def lexicographicallySmallestArray(self, nums: List[int], limit: int) -> List[int]:
         n = len(nums)
-        nums_index = sorted([(nums[i], i) for i in range(n)])
-        indexes = []
-        res = [0] * n
+        nums_sorted = sorted(nums)
+
+        curr_group = 0
+        num_to_group = {}
+        num_to_group[nums_sorted[0]] = curr_group
+
+        group_to_list = {}
+        group_to_list[curr_group] = deque([nums_sorted[0]])
+
+        for i in range(1, n):
+            if abs(nums_sorted[i] - nums_sorted[i - 1]) > limit:
+                curr_group += 1
+
+            num_to_group[nums_sorted[i]] = curr_group
+
+            if curr_group not in group_to_list:
+                group_to_list[curr_group] = deque()
+
+            group_to_list[curr_group].append(nums_sorted[i])
 
         for i in range(n):
-            if i == 0 or nums_index[i][0] - nums_index[i - 1][0] > limit:
-                indexes.append([])
-            indexes[-1].append(nums_index[i][1])
-        
-        for index in indexes:
-            sorted_index = sorted(index)
+            num = nums[i]
+            group = num_to_group[num]
+            nums[i] = group_to_list[group].popleft()
 
-            for j in range(len(sorted_index)):
-                res[sorted_index[j]] = nums[index[j]]
+        return nums
+
+    # def lexicographicallySmallestArray(self, nums: List[int], limit: int) -> List[int]:
+    #     n = len(nums)
+    #     nums_index = sorted([(nums[i], i) for i in range(n)])
+    #     indexes = []
+    #     res = [0] * n
+
+    #     for i in range(n):
+    #         if i == 0 or nums_index[i][0] - nums_index[i - 1][0] > limit:
+    #             indexes.append([])
+    #         indexes[-1].append(nums_index[i][1])
         
-        return res
+    #     for index in indexes:
+    #         sorted_index = sorted(index)
+
+    #         for j in range(len(sorted_index)):
+    #             res[sorted_index[j]] = nums[index[j]]
+        
+    #     return res
         
 def main():
     sol = Solution()
