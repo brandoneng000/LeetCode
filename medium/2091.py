@@ -3,27 +3,46 @@ from typing import List
 class Solution:
     def minimumDeletions(self, nums: List[int]) -> int:
         n = len(nums)
+        min_index = nums.index(min(nums))
+        max_index = nums.index(max(nums))
 
-        if n == 1:
-            return 1
+        min_dist_start = min_index + 1
+        min_dist_end = n - min_index
+        max_dist_start = max_index + 1
+        max_dist_end = n - max_index
+
+        res = min(
+            max(min_dist_start, max_dist_start),
+            min(min_dist_start + max_dist_end, min_dist_end + max_dist_start),
+            max(min_dist_end, max_dist_end)
+        )
+
+        return res
+
+    # def minimumDeletions(self, nums: List[int]) -> int:
+    #     n = len(nums)
+    #     INF = 10 ** 33
+
+    #     if n == 1:
+    #         return 1
         
-        max_index = min_index = -1
-        max_val = -float('inf')
-        min_val = float('inf')
+    #     max_index = min_index = -1
+    #     max_val = -INF
+    #     min_val = INF
 
-        for i in range(n):
-            if nums[i] > max_val:
-                max_val = nums[i]
-                max_index = i
-            if nums[i] < min_val:
-                min_val = nums[i]
-                min_index = i
+    #     for i in range(n):
+    #         if nums[i] > max_val:
+    #             max_val = nums[i]
+    #             max_index = i
+    #         if nums[i] < min_val:
+    #             min_val = nums[i]
+    #             min_index = i
 
-        left = max(max_index, min_index) + 1
-        right = n - min(max_index, min_index)
-        sides = min(max_index, min_index) + (n - max(max_index, min_index)) + 1
+    #     left = max(max_index, min_index) + 1
+    #     right = n - min(max_index, min_index)
+    #     sides = min(max_index, min_index) + (n - max(max_index, min_index)) + 1
 
-        return min(left, right, sides)
+    #     return min(left, right, sides)
         
 def main():
     sol = Solution()
