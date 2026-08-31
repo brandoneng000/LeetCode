@@ -7,28 +7,65 @@ class ListNode:
         self.next = next
 class Solution:
     def nodesBetweenCriticalPoints(self, head: Optional[ListNode]) -> List[int]:
-        prev_node = None
-        prev_index = -1
-        first_index = -1
-        temp = head
-        min_dist = float('inf')
-        index = 0
+        INF = 10 ** 33
+        res = [-1, -1]
 
-        while temp:
-            if prev_node and temp.next:
-                if prev_node.val < temp.val > temp.next.val or prev_node.val > temp.val < temp.next.val:
-                    if first_index == -1:
-                        first_index = index
-                    if prev_index != -1:
-                        min_dist = min(min_dist, index - prev_index)
-                    prev_index = index
-            prev_node = temp
-            temp = temp.next
-            index += 1
+        min_distance = INF
+        
+        prev_node = head
+        cur_node = head.next
+        cur_index = 1
+        prev_crit_index = 0
+        first_crit_index = 0
 
-        if first_index == prev_index:
-            return [-1, -1]
-        return [min_dist, prev_index - first_index]
+        while cur_node.next is not None:
+            if (
+                (cur_node.val < prev_node.val and cur_node.val < cur_node.next.val)
+                or (cur_node.val > prev_node.val and cur_node.val > cur_node.next.val)
+            ):
+                if prev_crit_index == 0:
+                    prev_crit_index = cur_index
+                    first_crit_index = cur_index
+                else:
+                    min_distance = min(
+                        min_distance, cur_index - prev_crit_index
+                    )
+                    prev_crit_index = cur_index
+
+            cur_index += 1
+            prev_node = cur_node
+            cur_node = cur_node.next
+
+        if min_distance != INF:
+            max_dist = prev_crit_index - first_crit_index
+            res = [min_distance, max_dist]
+
+        return res
+        
+
+    # def nodesBetweenCriticalPoints(self, head: Optional[ListNode]) -> List[int]:
+    #     prev_node = None
+    #     prev_index = -1
+    #     first_index = -1
+    #     temp = head
+    #     min_dist = float('inf')
+    #     index = 0
+
+    #     while temp:
+    #         if prev_node and temp.next:
+    #             if prev_node.val < temp.val > temp.next.val or prev_node.val > temp.val < temp.next.val:
+    #                 if first_index == -1:
+    #                     first_index = index
+    #                 if prev_index != -1:
+    #                     min_dist = min(min_dist, index - prev_index)
+    #                 prev_index = index
+    #         prev_node = temp
+    #         temp = temp.next
+    #         index += 1
+
+    #     if first_index == prev_index:
+    #         return [-1, -1]
+    #     return [min_dist, prev_index - first_index]
 
 
     # def nodesBetweenCriticalPoints(self, head: Optional[ListNode]) -> List[int]:
