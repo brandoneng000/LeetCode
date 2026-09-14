@@ -2,16 +2,30 @@ from typing import List
 
 class Solution:
     def isRectangleOverlap(self, rec1: List[int], rec2: List[int]) -> bool:
-        # corners should overlap in rect
-        A, B, C, D = rec1[0], rec1[1], rec1[2], rec1[3]
-        E, F, G, H = rec2[0], rec2[1], rec2[2], rec2[3]
+        if (
+            rec1[0] == rec1[2] or rec1[1] == rec1[3]
+            or rec2[0] == rec2[2] or rec2[1] == rec2[3]
+        ):
+            return False
 
-        # get the overlapping corners if there are any
-        x1 = max(A, E)
-        y1 = max(B, F)
-        x2 = min(C, G)
-        y2 = min(D, H)
-        return x1 < x2 and y1 < y2
+        return not (
+            rec1[2] <= rec2[0]
+            or rec1[3] <= rec2[1]
+            or rec1[0] >= rec2[2]
+            or rec1[1] >= rec2[3]
+        )
+
+    # def isRectangleOverlap(self, rec1: List[int], rec2: List[int]) -> bool:
+    #     # corners should overlap in rect
+    #     A, B, C, D = rec1[0], rec1[1], rec1[2], rec1[3]
+    #     E, F, G, H = rec2[0], rec2[1], rec2[2], rec2[3]
+
+    #     # get the overlapping corners if there are any
+    #     x1 = max(A, E)
+    #     y1 = max(B, F)
+    #     x2 = min(C, G)
+    #     y2 = min(D, H)
+    #     return x1 < x2 and y1 < y2
 
 
 def main():
