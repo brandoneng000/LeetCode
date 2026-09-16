@@ -1,13 +1,18 @@
+from math import comb
+
 class Solution:
     def numberOfSets(self, n: int, k: int) -> int:
-        mod = 1000000007
-        res = 1
+        return comb(n + k - 1, 2 * k) % 1_000_000_007
 
-        for i in range(1, k * 2 + 1):
-            res *= n + k - i
-            res //= i
+    # def numberOfSets(self, n: int, k: int) -> int:
+    #     mod = 1000000007
+    #     res = 1
+
+    #     for i in range(1, k * 2 + 1):
+    #         res *= n + k - i
+    #         res //= i
         
-        return res % mod
+    #     return res % mod
         
 def main():
     sol = Solution()
