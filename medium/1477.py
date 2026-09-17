@@ -3,23 +3,46 @@ from typing import List
 class Solution:
     def minSumOfLengths(self, arr: List[int], target: int) -> int:
         n = len(arr)
-        prefix = [float('inf')] * n
-        res = float('inf')
-        left = cur = 0
+        res = n + 1
+        total = 0
 
-        for right in range(n):
-            cur += arr[right]
-            while cur > target and left <= right:
-                cur -= arr[left]
+        dp = [n] * (n + 1)
+        left = 0
+
+        for right, x in enumerate(arr):
+            total += x
+
+            while total > target:
+                total -= arr[left]
                 left += 1
-            
-            if cur == target:
-                res = min(res, prefix[left - 1] + right - left + 1)
-                prefix[right] = min(prefix[right - 1], right - left + 1)
-            else:
-                prefix[right] = prefix[right - 1]
 
-        return -1 if res == float('inf') else res
+            dp[right + 1] = dp[right]
+
+            if total == target:
+                res = min(res, right - left + 1 + dp[left])
+                dp[right + 1] = min(dp[right], right - left + 1)
+
+        return -1 if res == n + 1 else res
+
+    # def minSumOfLengths(self, arr: List[int], target: int) -> int:
+    #     n = len(arr)
+    #     prefix = [float('inf')] * n
+    #     res = float('inf')
+    #     left = cur = 0
+
+    #     for right in range(n):
+    #         cur += arr[right]
+    #         while cur > target and left <= right:
+    #             cur -= arr[left]
+    #             left += 1
+            
+    #         if cur == target:
+    #             res = min(res, prefix[left - 1] + right - left + 1)
+    #             prefix[right] = min(prefix[right - 1], right - left + 1)
+    #         else:
+    #             prefix[right] = prefix[right - 1]
+
+    #     return -1 if res == float('inf') else res
 
 def main():
     sol = Solution()
