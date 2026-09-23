@@ -2,26 +2,51 @@ from typing import List
 
 class Solution:
     def minOperations(self, nums: List[int], x: int) -> int:
-        target = sum(nums) - x
         n = len(nums)
+        target = sum(nums) - x
 
         if target == 0:
             return n
-        
-        max_length = 0
-        left = 0
-        cur_sum = 0
+        elif target < 0:
+            return -1
 
-        for right, val in enumerate(nums):
-            cur_sum += val
-            while left <= right and cur_sum > target:
+        res = -1
+        cur_sum = 0
+        left = 0
+
+        for right in range(n):
+            cur_sum += nums[right]
+
+            while cur_sum > target:
                 cur_sum -= nums[left]
                 left += 1
-            
+
             if cur_sum == target:
-                max_length = max(max_length, right - left + 1)
+                res = max(res, right - left + 1)
+
+        return n - res if res != -1 else -1
+
+    # def minOperations(self, nums: List[int], x: int) -> int:
+    #     target = sum(nums) - x
+    #     n = len(nums)
+
+    #     if target == 0:
+    #         return n
         
-        return n - max_length if max_length else -1
+    #     max_length = 0
+    #     left = 0
+    #     cur_sum = 0
+
+    #     for right, val in enumerate(nums):
+    #         cur_sum += val
+    #         while left <= right and cur_sum > target:
+    #             cur_sum -= nums[left]
+    #             left += 1
+            
+    #         if cur_sum == target:
+    #             max_length = max(max_length, right - left + 1)
+        
+    #     return n - max_length if max_length else -1
         
 def main():
     sol = Solution()
