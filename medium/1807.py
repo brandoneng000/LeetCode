@@ -2,28 +2,48 @@ from typing import List
 
 class Solution:
     def evaluate(self, s: str, knowledge: List[List[str]]) -> str:
-        knowledge_dict = {}
-        stack = []
         res = []
+        bracket = False
 
-        for k, v in knowledge:
-            knowledge_dict[k] = v
-        
+        for key, word in knowledge:
+            s = s.replace('(' + key + ')', word)
+
         for c in s:
-            if stack:
-                stack.append(c)
-            else:
-                if c == '(':
-                    stack.append(c)
-                else:
-                    res.append(c)
-            
-            if stack and stack[-1] == ')':
-                key = ''.join(stack[1:-1])
-                stack.clear()
-                res.append(knowledge_dict.get(key, '?'))
+            if c == '(':
+                bracket = True
+                res.append('?')
+            elif c == ')':
+                bracket = False
+                continue
 
-        return "".join(res)
+            if not bracket:
+                res.append(c)
+            
+        return ''.join(res)
+
+    # def evaluate(self, s: str, knowledge: List[List[str]]) -> str:
+    #     knowledge_dict = {}
+    #     stack = []
+    #     res = []
+
+    #     for k, v in knowledge:
+    #         knowledge_dict[k] = v
+        
+    #     for c in s:
+    #         if stack:
+    #             stack.append(c)
+    #         else:
+    #             if c == '(':
+    #                 stack.append(c)
+    #             else:
+    #                 res.append(c)
+            
+    #         if stack and stack[-1] == ')':
+    #             key = ''.join(stack[1:-1])
+    #             stack.clear()
+    #             res.append(knowledge_dict.get(key, '?'))
+
+    #     return "".join(res)
         
 def main():
     sol = Solution()
