@@ -1,16 +1,21 @@
+from itertools import accumulate
+
 class Solution:
     def maxDepth(self, s: str) -> int:
-        res = 0
-        count = 0
+        return max(accumulate((c == '(') - (c == ')') for c in s))
 
-        for c in s:
-            if c == '(':
-                count += 1
-                res = max(res, count)
-            elif c == ')':
-                count -= 1
+    # def maxDepth(self, s: str) -> int:
+    #     res = 0
+    #     count = 0
+
+    #     for c in s:
+    #         if c == '(':
+    #             count += 1
+    #             res = max(res, count)
+    #         elif c == ')':
+    #             count -= 1
         
-        return res
+    #     return res
     
     # def maxDepth(self, s: str) -> int:
     #     result = 0
