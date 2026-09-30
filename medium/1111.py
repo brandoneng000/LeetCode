@@ -1,6 +1,17 @@
 from typing import List
 
 class Solution:
+    # def maxDepthAfterSplit(self, seq: str) -> List[int]:
+    #     res = []
+
+    #     for i, c in enumerate(seq):
+    #         if c == '(':
+    #             res.append(i % 2)
+    #         else:
+    #             res.append(1 - i % 2)
+
+    #     return res
+
     def maxDepthAfterSplit(self, seq: str) -> List[int]:
         res = []
         depth = 0
