@@ -3,19 +3,40 @@ class Solution:
         stack = []
 
         for p in s:
-            if p in "({[":
+            if p == '(' or p == '[' or p == '{':
                 stack.append(p)
             else:
                 if not stack:
                     return False
-                elif p == ")" and stack[-1] == "(" or \
-                     p == "]" and stack[-1] == "[" or \
-                     p == "}" and stack[-1] == "{":
-                    stack.pop()
-                else:
+
+                top = stack.pop()
+
+                if top == '(' and p != ')':
                     return False
-        
+                if top == '[' and p != ']':
+                    return False
+                if top == '{' and p != '}':
+                    return False
+
         return not stack
+
+    # def isValid(self, s: str) -> bool:
+    #     stack = []
+
+    #     for p in s:
+    #         if p in "({[":
+    #             stack.append(p)
+    #         else:
+    #             if not stack:
+    #                 return False
+    #             elif p == ")" and stack[-1] == "(" or \
+    #                  p == "]" and stack[-1] == "[" or \
+    #                  p == "}" and stack[-1] == "{":
+    #                 stack.pop()
+    #             else:
+    #                 return False
+        
+    #     return not stack
                 
         
 def main():
