@@ -1,29 +1,45 @@
 from typing import List
+from math import comb
 
 class Solution:
     def numOfWays(self, nums: List[int]) -> int:
-        mod = 1000000007
-        pascals = [[0 for i in range(j + 1)] for j in range(len(nums))]
+        def dfs(nums):
+            n = len(nums)
 
-        for row in pascals:
-            row[0] = 1
-            row[-1] = 1
-        
-        for i in range(2, len(pascals)):
-            for j in range(1, len(pascals[i]) - 1):
-                pascals[i][j] = pascals[i - 1][j - 1] + pascals[i - 1][j]
-
-        def dfs(nums: List[int]):
-            if len(nums) < 3:
+            if n < 3:
                 return 1
+
+            left = [a for a in nums if a < nums[0]]
+            right = [a for a in nums if a > nums[0]]
+
+            return dfs(left) * dfs(right) * comb(n - 1, len(left)) % MOD
+
+        MOD = 1_000_000_007
+        return (dfs(nums) - 1) % MOD
+
+    # def numOfWays(self, nums: List[int]) -> int:
+    #     mod = 1000000007
+    #     pascals = [[0 for i in range(j + 1)] for j in range(len(nums))]
+
+    #     for row in pascals:
+    #         row[0] = 1
+    #         row[-1] = 1
+        
+    #     for i in range(2, len(pascals)):
+    #         for j in range(1, len(pascals[i]) - 1):
+    #             pascals[i][j] = pascals[i - 1][j - 1] + pascals[i - 1][j]
+
+    #     def dfs(nums: List[int]):
+    #         if len(nums) < 3:
+    #             return 1
             
-            root = nums[0]
+    #         root = nums[0]
 
-            left = [num for num in nums if num < root]
-            right = [num for num in nums if num > root]
-            return (pascals[len(nums) - 1][len(left)] * (dfs(left) * dfs(right) % mod)) % mod
+    #         left = [num for num in nums if num < root]
+    #         right = [num for num in nums if num > root]
+    #         return (pascals[len(nums) - 1][len(left)] * (dfs(left) * dfs(right) % mod)) % mod
 
-        return dfs(nums) - 1
+    #     return dfs(nums) - 1
 
 
 def main():
