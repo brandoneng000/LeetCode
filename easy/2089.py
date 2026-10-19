@@ -1,36 +1,45 @@
 from typing import List
+from bisect import bisect_left, bisect_right
 
 class Solution:
     def targetIndices(self, nums: List[int], target: int) -> List[int]:
         nums.sort()
-        if target not in nums:
-            return []
+        left = bisect_left(nums, target)
+        right = bisect_right(nums, target)
 
-        def binary_search(nums, target, lower=True) -> int:
-            left, right = 0, len(nums) - 1
-            while left <= right:
-                middle = (left + right) // 2
-                if target == nums[middle]:
-                    if lower:
-                        if left == middle or nums[middle] != nums[middle - 1]:
-                            return middle
-                        else:
-                            right = middle - 1
-                    else:
-                        if middle == right or nums[middle] != nums[middle + 1]:
-                            return middle
-                        else:
-                            left = middle + 1
-                elif target < nums[middle]:
-                    right = middle - 1
-                elif target > nums[middle]:
-                    left = middle + 1
-            return -1
+        return list(range(left, right))
+        
 
-        left = binary_search(nums, target)
-        right = binary_search(nums, target, False)
+    # def targetIndices(self, nums: List[int], target: int) -> List[int]:
+    #     nums.sort()
+    #     if target not in nums:
+    #         return []
 
-        return range(left, right + 1)
+    #     def binary_search(nums, target, lower=True) -> int:
+    #         left, right = 0, len(nums) - 1
+    #         while left <= right:
+    #             middle = (left + right) // 2
+    #             if target == nums[middle]:
+    #                 if lower:
+    #                     if left == middle or nums[middle] != nums[middle - 1]:
+    #                         return middle
+    #                     else:
+    #                         right = middle - 1
+    #                 else:
+    #                     if middle == right or nums[middle] != nums[middle + 1]:
+    #                         return middle
+    #                     else:
+    #                         left = middle + 1
+    #             elif target < nums[middle]:
+    #                 right = middle - 1
+    #             elif target > nums[middle]:
+    #                 left = middle + 1
+    #         return -1
+
+    #     left = binary_search(nums, target)
+    #     right = binary_search(nums, target, False)
+
+    #     return list(range(left, right + 1))
 
 def main():
     sol = Solution()
