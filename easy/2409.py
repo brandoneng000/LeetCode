@@ -1,15 +1,25 @@
 class Solution:
     def countDaysTogether(self, arriveAlice: str, leaveAlice: str, arriveBob: str, leaveBob: str) -> int:
-        if leaveAlice < arriveBob or leaveBob < arriveAlice:
-            return 0
-        
-        arrive = max(arriveAlice, arriveBob).split('-')
-        leave = min(leaveAlice, leaveBob).split('-')
-        months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+        def convert_date(date: str):
+            m, d = map(int, date.split('-'))
+            return sum(months[:m - 1]) + d
 
-        arrive = sum(months[:int(arrive[0]) - 1]) + int(arrive[1])
-        leave = sum(months[:int(leave[0]) - 1]) + int(leave[1])
-        return leave - arrive + 1
+        months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+        start = max(convert_date(arriveAlice), convert_date(arriveBob))
+        end = min(convert_date(leaveAlice), convert_date(leaveBob))
+        return max(0, end - start + 1)
+
+    # def countDaysTogether(self, arriveAlice: str, leaveAlice: str, arriveBob: str, leaveBob: str) -> int:
+    #     if leaveAlice < arriveBob or leaveBob < arriveAlice:
+    #         return 0
+        
+    #     arrive = max(arriveAlice, arriveBob).split('-')
+    #     leave = min(leaveAlice, leaveBob).split('-')
+    #     months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+    #     arrive = sum(months[:int(arrive[0]) - 1]) + int(arrive[1])
+    #     leave = sum(months[:int(leave[0]) - 1]) + int(leave[1])
+    #     return leave - arrive + 1
 
 def main():
     sol = Solution()
