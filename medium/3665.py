@@ -1,0 +1,36 @@
+from typing import List
+
+class Solution:
+    def uniquePaths(self, grid: List[List[int]]) -> int:
+        MOD = 1_000_000_007
+        m, n = len(grid), len(grid[0])
+
+        f = [[[0, 0] for _ in range(n)] for _ in range(m)]
+        f[0][0][0] = 1
+
+        for i in range(m):
+            for j in range(n):
+                if i > 0:
+                    if grid[i - 1][j] == 0:
+                        f[i][j][0] = f[i - 1][j][0] + f[i - 1][j][1]
+                    else:
+                        f[i][j][0] = f[i - 1][j][1]
+                    f[i][j][0] %= MOD
+
+                if j > 0:
+                    if grid[i][j - 1] == 0:
+                        f[i][j][1] = f[i][j - 1][0] + f[i][j - 1][1]
+                    else:
+                        f[i][j][1] = f[i][j - 1][0]
+                    f[i][j][1] %= MOD
+
+        return (f[m - 1][n - 1][0] + f[m - 1][n - 1][1]) % MOD
+
+def main():
+    sol = Solution()
+    print(sol.uniquePaths(grid = [[0,1,0],[0,0,1],[1,0,0]]))
+    print(sol.uniquePaths(grid = [[0,0],[0,0]]))
+    print(sol.uniquePaths(grid = [[0,1,1],[1,1,0]]))
+
+if __name__ == '__main__':
+    main()
