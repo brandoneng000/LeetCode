@@ -3,14 +3,20 @@ from typing import List
 class Solution:
     def minMoves2(self, nums: List[int]) -> int:
         nums.sort()
-        start, end = 0, len(nums) - 1
-        res = 0
-        while start < end:
-            res += nums[end] - nums[start]
-            start += 1
-            end -= 1
+        median = nums[len(nums) // 2]
+
+        return sum(abs(num - median) for num in nums)
+
+    # def minMoves2(self, nums: List[int]) -> int:
+    #     nums.sort()
+    #     start, end = 0, len(nums) - 1
+    #     res = 0
+    #     while start < end:
+    #         res += nums[end] - nums[start]
+    #         start += 1
+    #         end -= 1
         
-        return res
+    #     return res
 
 def main():
     sol = Solution()
