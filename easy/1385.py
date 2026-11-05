@@ -2,17 +2,30 @@ from typing import List
 
 class Solution:
     def findTheDistanceValue(self, arr1: List[int], arr2: List[int], d: int) -> int:
-        # Return the number of values in arr1 that fulfill |arr1[i]-arr2[j]| <= d where j is all arr2[j] is all vals in arr2
-        result = 0
+        n, m = len(arr1), len(arr2)
+        res = 0
 
-        for num in arr1:
-            index = 0
-            while(index < len(arr2) and abs(num - arr2[index]) > d):
-                index += 1
-            if index == len(arr2):
-                result += 1
+        for i in range(n):
+            for j in range(m):
+                if abs(arr1[i] - arr2[j]) <= d:
+                    break
+            else:
+                res += 1
+
+        return res
+
+    # def findTheDistanceValue(self, arr1: List[int], arr2: List[int], d: int) -> int:
+    #     # Return the number of values in arr1 that fulfill |arr1[i]-arr2[j]| <= d where j is all arr2[j] is all vals in arr2
+    #     result = 0
+
+    #     for num in arr1:
+    #         index = 0
+    #         while(index < len(arr2) and abs(num - arr2[index]) > d):
+    #             index += 1
+    #         if index == len(arr2):
+    #             result += 1
         
-        return result
+    #     return result
 
 def main():
     sol = Solution()
