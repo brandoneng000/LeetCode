@@ -3,26 +3,57 @@ from collections import Counter
 
 class Solution:
     def countServers(self, n: int, logs: List[List[int]], x: int, queries: List[int]) -> List[int]:
-        query_index = sorted([q, i] for i, q in enumerate(queries))
-        count = Counter()
         logs.sort(key=lambda x: x[1])
-        i = j = used = 0
-        res = [0] * len(queries)
+        sorted_queries = sorted(enumerate(queries), key=lambda x: x[1])
 
-        for time, index in query_index:
-            while i < len(logs) and logs[i][1] <= time:
-                count[logs[i][0]] += 1
-                used += count[logs[i][0]] == 1
-                i += 1
-            
-            while j < i and logs[j][1] < time - x:
-                count[logs[j][0]] -= 1
-                used -= count[logs[j][0]] == 0
-                j += 1
-            
-            res[index] = n - used
-        
+        res = [0] * len(queries)
+        count = [0] * (n + 1)
+        active = 0
+        left = right = 0
+
+        for i, q in sorted_queries:
+            while right < len(logs) and logs[right][1] <= q:
+                id = logs[right][0]
+
+                if count[id] == 0:
+                    active += 1
+                count[id] += 1
+                right += 1
+
+            while left < right and logs[left][1] < q - x:
+                id = logs[left][0]
+                count[id] -= 1
+
+                if count[id] == 0:
+                    active -= 1
+                left += 1
+
+            res[i] = n - active
+
         return res
+        
+
+    # def countServers(self, n: int, logs: List[List[int]], x: int, queries: List[int]) -> List[int]:
+    #     query_index = sorted([q, i] for i, q in enumerate(queries))
+    #     count = Counter()
+    #     logs.sort(key=lambda x: x[1])
+    #     i = j = used = 0
+    #     res = [0] * len(queries)
+
+    #     for time, index in query_index:
+    #         while i < len(logs) and logs[i][1] <= time:
+    #             count[logs[i][0]] += 1
+    #             used += count[logs[i][0]] == 1
+    #             i += 1
+            
+    #         while j < i and logs[j][1] < time - x:
+    #             count[logs[j][0]] -= 1
+    #             used -= count[logs[j][0]] == 0
+    #             j += 1
+            
+    #         res[index] = n - used
+        
+    #     return res
 
 
                     
