@@ -3,24 +3,43 @@ from typing import List
 class Solution:
     def longestMonotonicSubarray(self, nums: List[int]) -> int:
         n = len(nums)
-        res = 1
-        decrease = 1
-        increase = 1
+        res = increase = decrease = 1
 
         for i in range(n - 1):
-            if nums[i] > nums[i + 1]:
+            if nums[i] < nums[i + 1]:
                 increase += 1
+                decrease = 1
+            elif nums[i] > nums[i + 1]:
+                decrease += 1
+                increase = 1
             else:
                 increase = 1
-
-            if nums[i] < nums[i + 1]:
-                decrease += 1
-            else:
                 decrease = 1
-            
+
             res = max(res, increase, decrease)
-        
+
         return res
+
+    # def longestMonotonicSubarray(self, nums: List[int]) -> int:
+    #     n = len(nums)
+    #     res = 1
+    #     decrease = 1
+    #     increase = 1
+
+    #     for i in range(n - 1):
+    #         if nums[i] > nums[i + 1]:
+    #             increase += 1
+    #         else:
+    #             increase = 1
+
+    #         if nums[i] < nums[i + 1]:
+    #             decrease += 1
+    #         else:
+    #             decrease = 1
+            
+    #         res = max(res, increase, decrease)
+        
+    #     return res
         
 def main():
     sol = Solution()
