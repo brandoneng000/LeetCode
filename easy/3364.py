@@ -6,14 +6,35 @@ class Solution:
         INF = 10 ** 33
         res = INF
 
-        for size in range(l, r + 1):
-            for i in range(n - size + 1):
-                cur = sum(nums[i: i + size])
+        for left in range(n):
+            cur_sum = 0
 
-                if cur > 0:
-                    res = min(res, cur)
+            for right in range(left, n):
+                cur_sum += nums[right]
+                size = right - left + 1
+
+                if l <= size <= r and 0 < cur_sum < res:
+                    res = cur_sum
+
+                if size > r:
+                    break
 
         return res if res != INF else -1
+
+
+    # def minimumSumSubarray(self, nums: List[int], l: int, r: int) -> int:
+    #     n = len(nums)
+    #     INF = 10 ** 33
+    #     res = INF
+
+    #     for size in range(l, r + 1):
+    #         for i in range(n - size + 1):
+    #             cur = sum(nums[i: i + size])
+
+    #             if cur > 0:
+    #                 res = min(res, cur)
+
+    #     return res if res != INF else -1
 
 def main():
     sol = Solution()
