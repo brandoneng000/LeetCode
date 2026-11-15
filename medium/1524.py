@@ -2,20 +2,33 @@ from typing import List
 
 class Solution:
     def numOfSubarrays(self, arr: List[int]) -> int:
-        mod = 1000000007
-        res = 0
-        odds = 0
-        evens = 0
+        MOD = 1_000_000_007
+        n = len(arr)
+        odd = prefix = 0
 
-        for val in arr:
-            evens += 1
+        for num in arr:
+            prefix += num
+            odd += prefix % 2
 
-            if val % 2:
-                odds, evens = evens, odds
+        odd += (n - odd) * odd
+
+        return odd % MOD
+
+    # def numOfSubarrays(self, arr: List[int]) -> int:
+    #     mod = 1000000007
+    #     res = 0
+    #     odds = 0
+    #     evens = 0
+
+    #     for val in arr:
+    #         evens += 1
+
+    #         if val % 2:
+    #             odds, evens = evens, odds
             
-            res += odds
+    #         res += odds
             
-        return res % mod
+    #     return res % mod
 
         
 def main():
