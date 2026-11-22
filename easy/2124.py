@@ -1,15 +1,19 @@
 class Solution:
     def checkString(self, s: str) -> bool:
-        return not ('ba' in s)
+        return 'ba' not in s
+    
+    # def checkString(self, s: str) -> bool:
+    #     return not ('ba' in s)
+    
+    # def checkString(self, s: str) -> bool:
+    #     b = False
+    #     for letter in s:
+    #         if letter == 'b':
+    #             b = True
+    #         if b and letter == 'a':
+    #             return False
         
-        # b = False
-        # for letter in s:
-        #     if letter == 'b':
-        #         b = True
-        #     if b and letter == 'a':
-        #         return False
-        
-        # return True
+    #     return True
 
 def main():
     sol = Solution()
