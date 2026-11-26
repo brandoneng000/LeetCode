@@ -1,18 +1,28 @@
 class Solution:
     def canAliceWin(self, n: int) -> bool:
-        stone_remove = 10
-        alice_turn = True
+        take, k = 10, 0
 
-        while n - stone_remove >= 0:
-            if alice_turn:
-                n -= stone_remove
-            else:
-                n -= stone_remove
+        while n >= take:
+            n -= take
+            take -= 1
+            k += 1
+
+        return k % 2 == 1
+
+    # def canAliceWin(self, n: int) -> bool:
+    #     stone_remove = 10
+    #     alice_turn = True
+
+    #     while n - stone_remove >= 0:
+    #         if alice_turn:
+    #             n -= stone_remove
+    #         else:
+    #             n -= stone_remove
             
-            stone_remove -= 1
-            alice_turn = not alice_turn
+    #         stone_remove -= 1
+    #         alice_turn = not alice_turn
         
-        return not alice_turn
+    #     return not alice_turn
         
 
 def main():
